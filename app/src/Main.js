@@ -46,6 +46,7 @@
 		
 		// Environment
 		// todo : releaseenvとdevenvにデフォルト値を分け、さらにユーザーごとに設定を分け、appenvにセットするようにする
+		var base_url = window.location.origin == "https://nabepon.github.io" ? "https://nabepon.github.io/xenosteel-public" : "http://localhost:9000";
 		window.appenv = {
 			version         : app_version ,
 			in_review       : false,
@@ -65,17 +66,17 @@
 			load_php        : "https://xxxx", 
 			form_url        : "https://xxxx",
 			
-			img_base_url    : "http://localhost:9000/app/img/", // 画像をどこから読むか。local_image_modeの判定で変わる
-			img_server_url  : "http://localhost:9000/app/img/", // サーバ上の画像場所。local_image_modeで分けるため存在。
-			base_url        : "http://localhost:9000/app/", // 各種ソースのベース
+			img_base_url    : base_url + "/app/img/", // 画像をどこから読むか。local_image_modeの判定で変わる
+			img_server_url  : base_url + "/app/img/", // サーバ上の画像場所。local_image_modeで分けるため存在。
+			base_url        : base_url + "/app/", // 各種ソースのベース
 			official_twitter: "nabepon_dev",
 			twitter_hash_tag: "{hash_tag}", //"#xenosteel",
 			src_main        : "src/Main.js",
 			src_css         : "src/Style.css",
 			src_list        : [ "src/Libs.js", "src/Data.js", "src/App.js" ],
-			scratch_js_url  : "http://localhost:9000/app/sample/ScratchPad/", // '../program/webview/sample/ScratchPad/ScratchPad.js'をwatch
+			scratch_js_url  : base_url + "/app/sample/ScratchPad/", // '../program/webview/sample/ScratchPad/ScratchPad.js'をwatch
 			connections     : [
-				"http://localhost:9000/app/",
+				base_url + "/app/"
 			],
 		}
 		

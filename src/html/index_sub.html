@@ -13,9 +13,10 @@
 	<meta http-equiv="expires" content="0">
 	<title>Xenosteel</title>
     <script>
+		var base_url = window.location.origin == "https://nabepon.github.io" ? "https://nabepon.github.io/xenosteel-public" : "http://localhost:9000";
 	    window.onload = function(){
 			el = document.createElement("script");
-			el.src = "http://xenosteel.nabeponapp.com/src/src/Main.js?date=" + Date.now();
+			el.src = base_url + "/app/src/Main.js?date=" + Date.now();
 			el.type = "text/javascript";
 			document.body.appendChild(el);
 		}
