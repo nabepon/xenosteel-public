@@ -1,0 +1,40 @@
+{{ __.helper.startPage("quest-select_area_view") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>シナリオ一覧</i></div>
+	<div class="page_content">
+		<div class="word_map_container">
+			<div id="world_map_img" class="map_img_wrapper">
+				<div class="world_map_img"></div>
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+			
+		</div>
+		<div class="list_container">
+			<div id="area_list"       class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				{% _.each(area_list,function(quest_list,n){ %}
+					{% _.each(quest_list,function(area,n){ %}
+						<a class="area_list_btn list_btn_{{ (area.world_id<100)? 1 : (area.world_id<500)? 3 : 5 }}" data-after_se="1" data-href="/html/Quest/selectCave?id={{ area.id }}" >
+							<i>{{ area.area_name }}</i>
+							{% if( area.clear_flag >= 1 ){ %}
+								<div class="quest_clear_icon"></div>
+							{% }else if( area.play_flag == 0 ){ %}
+								<div class="quest_new_icon"></div>
+							{% } %}
+						</a>
+						{% if(area.remain_time){ %}
+							<div class="quest_info">└ あと {{ area.remain_time }}! ┘</div>
+						{% }else if(area.remain_term){ %}
+							<div class="quest_info">└ {{ area.remain_term }} まで! ┘</div>
+						{% } %}
+					{% }) %}
+				{% }) %}
+				<div class="bottom_spacer"></div>
+			</div>
+			<div class="please_select"><i>クエストを選択してください</i></div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

@@ -1,0 +1,28 @@
+{{ __.helper.startPage("shop-recover","shop_page") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>モンスタースパ</i></div>
+	<div class="page_content">
+		{{ __.macro("shop_info",response) }}
+		<div class="list_container">
+			<div id="shop_index_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				<div class="description"><i>魔石やコインをゲットしよう！</i></div>
+				<a class="list_btn_1" data-after_se="1" data-href="/html/Shop/arbeit"   ><i>アルバイト</i></a>
+				
+				<div class="description"><i>魔石を買うならこちらから！</i></div>
+				<a class="list_btn_1" data-after_se="1" data-href="/html/Shop/realMoney"><i>魔石ショップ</i></a>
+				
+				<div class="description"><i>モンスターを捕まえる準備をしよう！</i></div>
+				<a class="list_btn_1" data-after_se="1" data-href="/html/Shop/packun"   ><i>パックンショップ</i></a>
+				
+				<div class="description"><i>モンスターを回復させよう！</i></div>
+				<a class="list_btn_1" data-after_se="1" data-href="/html/Shop/recover"  ><i>モンスタースパ</i></a>
+				
+				<div class="bottom_spacer"></div>
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+			<a class="trigger_back_key back_btn arrow_btn_1" data-back-default="/html/Shop/index"><i>戻る</i></a>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

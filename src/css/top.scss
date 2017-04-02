@@ -1,0 +1,325 @@
+@charset "utf-8";
+@import "compass";
+@import "setting";
+
+/*==========================================================================*/
+/*** mypage
+============================================================================*/
+#top-mypage{
+	.chara{
+		@include position(10px,-40px);
+		&.chara_1{ @include img_bg("ui/mypage/chara_1.png"); }
+		&.chara_2{ @include img_bg("ui/mypage/chara_2.png"); }
+	}
+	.world_map_img{
+		width:626px;
+		height:$content_height;
+	}
+	.map_img_wrapper{
+		background:#000;
+	}
+	.chara_bg{
+		@include position();
+		@include img_bg("ui/mypage/mypage_bg.png");
+	}
+	.status{
+		@include position(44px,157px);
+		@include font_size(12px);
+		color:$font_white;
+		@include shadow();
+		
+		div{ @include position(); }
+		.status_0{ top:( 19px * 0 ); }
+		.status_1{ top:( 19px * 1 ); }
+		.status_2{ top:( 19px * 2 ); }
+		.status_3{ top:( 19px * 3 ); }
+		.status_4{ top:( 19px * 4 ); }
+		.status_5{ top:( 19px * 5 ); }
+		.status_6{ top:( 19px * 6 ); }
+		.status_7{ top:( 19px * 7 ); }
+		.status_8{ top:( 19px * 8 ); }
+	}
+	.mission_contaner{
+		@include position(36px,138px);
+		.mission_title{
+			@include position(0px,2px);
+			@include font_size(12px);
+		}
+		#mission_item_container{
+			@include position(19px,0px);
+			height: 181px;
+			width: 166px;
+			overflow:hidden;
+			.mission_item_bg{
+				position:relative;
+				@include img_bg("ui/mypage/mission_item_bg.png");
+				width: 164px;
+				text-align:left;
+				@include border-radius(2px);
+				margin-bottom: -2px;
+				
+				&.GUERRILLA{ @include img_bg("ui/mypage/mission_item_bg_2.png"); }
+				&.EVENT    { @include img_bg("ui/mypage/mission_item_bg_2.png"); }
+				
+				.mission_item_text{
+					@include position(7px,7px);
+					width: 150px;
+					white-space: normal;
+					font-size:10px;
+					line-height:12px;
+				}
+				.mission_clear_icon{
+			    	@include img_bg("ui/mypage/clear.png");
+			    	@include position(-6px,-6px);
+				}
+			}
+			.mission_time_text{
+				font-size:10px;
+				margin: -4px 0 2px 0;
+			}
+		}
+	}
+	.menu_btns{
+		@include position(259px,128px);
+		
+		a{ @include position(); }
+		.menu_0{ top:( 33px * 0 ); left:( 95px * 0 ); }
+		.menu_1{ top:( 33px * 0 ); left:( 95px * 1 ); }
+		.menu_2{ top:( 33px * 1 ); left:( 95px * 0 ); }
+		.menu_3{ top:( 33px * 1 ); left:( 95px * 1 ); }
+		.menu_4{ top:( 33px * 2 ); left:( 95px * 0 ); }
+		.menu_5{ top:( 33px * 2 ); left:( 95px * 1 ); }
+		
+		.mypage_menu_btn.present{
+			.batch{ @include position(-5px,0px,"","top_right"); }
+		}
+	}
+
+	/* ボタン */
+	.back_to_mypage{
+		@include position_bottom_right(2px);
+	}
+	.goto_map{
+		@include position_bottom_right(2px);
+	}
+	.chara_change{
+		@include position_bottom(2px);
+	}
+	
+	.kei_1{
+		@include img_bg("ui/quest/kei_map_up.png");
+		@include position();
+	}
+	.kei_2{
+		@include img_bg("ui/quest/kei_map_bottom.png");
+		@include position_bottom();
+	}
+}
+
+/*==========================================================================*/
+/*** present_list
+============================================================================*/
+
+$present_bg                  : #142c64;
+$present_bg_received         : #08132F;
+$receive_btn                 : #4F8AE4;
+$receive_btn_received        : #888888;
+$present_font_color_received : #8F97AC;
+$limit_time_font_color       : #FFFC8D;
+
+.present_list{
+	.message{
+		height:300px;
+	}
+	#present_list_view{
+		@include rect(0px,10px,280px,325px);
+		overflow: hidden;
+		text-shadow: none;
+		
+		.list_zero_text{
+			width: 280px;
+			padding: 140px 0px;
+		}
+		
+		.present_view{
+			margin: 3px 0px;
+			background-color: $present_bg;
+			padding: 3px 0px 3px 8px;
+			
+			.present_container{
+				vertical-align:middle;
+				min-height: 40px;
+				.td1{
+					width:200px;
+					text-align:left;
+					white-space: normal;
+					font-size:12px;
+					
+					.receive_time{
+						font-size: 10px;
+						color: $present_font_color_received;
+					}
+					.limit_time{
+						font-size: 10px;
+						color: $limit_time_font_color;
+						text-align:right;
+						border-top: 1px solid $present_font_color_received;
+					}
+				}
+				.td2{
+					width:72px;
+					text-align:right;
+				}
+				.receive{
+					display:inline-block;
+					min-width: 62px;
+					text-align: center;
+					background-color: $receive_btn;
+					margin-right: 6px;
+					padding: 2px 0px;
+				}
+			}
+		}
+		// 受け取り後表示
+		[state-received="true"].present_view{
+			background-color: $present_bg_received;
+			.present_container{
+				.td1{ color:$present_font_color_received; }
+				.td2{ color:#E5E5E5; }
+				.receive{ background-color: $receive_btn_received; }
+				.td1 .limit_time{
+					color: $present_font_color_received
+				}
+			}
+		}
+	}
+}
+
+/*==========================================================================*/
+/*** phrase_list
+============================================================================*/
+.phrase_list{
+	.message{
+		height:350px;
+	}
+	.phrase_btns_view{
+		@include position(9px,-1px);
+		.phrase_btn_view{
+			vertical-align: top;
+			@include size(100px,40px);
+			margin: 0px -3px;
+			i{
+				top:2px;
+			}
+		}
+	}
+	#phrase_list_view{
+		@include rect(47px,5px,290px,327px);
+		overflow: hidden;
+		text-shadow: none;
+		
+		.list_zero_text{
+			width: 280px;
+			padding: 140px 0px;
+		}
+		
+		.phrase_view{
+			margin: 3px 0px;
+			background-color:#142c64;
+			padding: 3px 0px 6px 8px;
+			
+			.phrase_container{
+				vertical-align:middle;
+				min-height: 40px;
+				.td1{
+					width:243px;
+					text-align:left;
+					white-space: normal;
+					font-size:12px;
+					.no{
+						color:#fcee8d;
+					}
+				}
+				.td2{
+					width:30px;
+					text-align:right;
+					@include font_size(24px);
+					color:#dfe457;
+					color:#A2A7C6;
+				}
+				.fav_star{
+					display: inline-block;
+					min-width: 30px;
+					text-align: right;
+					margin-right: 9px;
+				}
+				.fav.fav_star{
+					color:#FFFF4B;
+				}
+			}
+		}
+	}
+}
+
+
+/*==========================================================================*/
+/*** howto_list
+============================================================================*/
+.howto_list{
+	.message{
+		height:300px;
+	}
+	#howto_list_view{
+		@include rect(0px,10px,280px,327px);
+		overflow: hidden;
+		text-shadow: none;
+		
+		.help_title{
+			width: 280px;
+			margin:20px 0px 10px 0px;
+			color:#FFFE69;
+		}
+		.help_sub_title{
+			width: 280px;
+			padding: 8px 0px;
+			margin: 4px 0px;
+			background-color:#142c64;
+		}
+	}
+}
+
+
+/*==========================================================================*/
+/*** user_config
+============================================================================*/
+.user_config_container{
+	text-align:left;
+	@include position(0px,-10px,relative);
+	a.cmn_btn_1, a.cmn_btn_2{
+		@include position(0px,10px,relative);
+		width :100px;
+		height:40px;
+		i{ top: 3px; }
+	}
+}
+
+
+/*==========================================================================*/
+/*** other_menu
+============================================================================*/
+.other_menu_container{
+	text-align: left;
+	a.cmn_btn_1, a.cmn_btn_2{
+		@include position(0px,0px,relative);
+		width :130px;
+		height:40px;
+		i{ top: 3px; }
+	}
+}
+
+
+
+
+
+
+

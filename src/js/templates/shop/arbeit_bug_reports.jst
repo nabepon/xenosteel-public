@@ -1,0 +1,29 @@
+{{ __.helper.startPage("shop-arbelt_bug_reports") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>バグ報告</i></div>
+	<div class="page_content">
+		<div class="form_container">
+			<form name="form">
+				<div class="name_container">
+					<div class="text_name">お名前</div>
+					<input class="form_name" name="name" type="text" placeholder="名前を入力してください" />
+				</div>
+				
+				<div class="mail_container">
+					<div class="text_mail">メールアドレス(任意)</div>
+					<input class="form_mail" name="mail" type="text" placeholder="メールアドレスを入力してください" />
+				</div>
+				
+				<div class="content_container">
+					<div class="text_content">バグ内容、再現方法</div>
+					<textarea class="form_content" name="content" placeholder="バグ内容と再現方法を入力してください"></textarea>
+				</div>
+				
+				<div class="btn_container">
+					<a class="cmn_btn_1 cancel" ><i>キャンセル</i></a>
+					<a class="cmn_btn_1 submit" ><i>送信する</i></a>
+				</div>
+			</form>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

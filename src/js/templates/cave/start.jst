@@ -1,0 +1,66 @@
+
+<style>
+#map_container{
+	position:relative;
+	width:{{ map.chip_size * map.x }}px;
+	height:{{ map.chip_size * map.y }}px;
+	-webkit-transform: rotate(0deg);
+}
+.menu{
+	position:relative;
+}
+textarea{min-width:316px;height: 30px;}
+input[type="text"]{min-width:318px;}
+	
+</style>
+<hr/>
+
+<div class="menu">
+	<input type="button" id="start_btn"   value="開始">
+	<input type="button" id="end_btn"     value="終了">
+	<input type="button" id="next_btn"    value="次へ">
+	<br/>
+	<input type="button" id="retire_btn"  value="リタイア">
+	<input type="button" id="death_btn"   value="全滅">
+	<input type="button" id="clear_btn"   value="クリア">
+	<br/>
+	<input type="button" id="console_btn" value="コンソール">
+	<input type="button" id="zoom_btn"    value="ズーム">
+	<br/>
+	{% /* %}
+	<hr/>
+	<form class="cave_form">
+		<table>
+			<tr><td>CaveREC</td></tr>
+			{% _.each(cave,function(attr,key){ %}
+				<tr>
+				<td>{{ key }}</td>
+				{% if(key=='result' || key=='status' || key=='members' || key=='members_start' || key=='scratches'){ %}
+					<td><textarea name="{{ key }}" >{{ __.toJSON(attr) }}</textarea></td>
+				{% }else{ %}
+					<td><input type="text" name="{{ key }}" value="{{{ __.toJSON(attr) }}}" /></td>
+				{% } %}
+				
+				</tr>
+			{% }) %}
+			<tr><td>CaveMapREC</td></tr>
+			{% _.each(map,function(attr,key){ %}
+				<tr>
+				<td>{{ key }}</td>
+				{% if(key=='map' || key=='scratches' || key=='caveMapData' || key=='questListData' || key=='make_data'){ %}
+					<td><textarea name="{{ key }}" >{{ __.toJSON(attr) }}</textarea></td>
+				{% }else{ %}
+					<td><input type="text" name="{{ key }}" value="{{{ __.toJSON(attr) }}}" /></td>
+				{% } %}
+				
+				</tr>
+			{% }) %}
+		</table>
+	</form>
+	{% */ %}
+	
+	{{ __.macro("dev_menu") }}
+	
+	<div style="height:500px;"></div>
+	
+</div>

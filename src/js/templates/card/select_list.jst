@@ -1,0 +1,43 @@
+{{ __.helper.startPage("card-" + type,"card_list_page") }}
+	<div class="list_bg"></div>
+	<div class="card_list_bg"></div>
+	<div class="page_title"><i>
+		{{ (type=="mix_select")    ? '合成'           : '' }}
+		{{ (type=="fav_select")    ? 'お気に入り登録' : '' }}
+		{{ (type=="deck")          ? 'デッキ編成'     : '' }}
+		{{ (type=="sell_select")   ? '売却'           : '' }}
+		{{ (type=="limitup_select")? '限界突破合成  ' : '' }}
+		{{ (type=="powerup_select")? 'モンスター強化' : '' }}
+	</i></div>
+	<div class="page_content">
+		<div class="members_bg"></div>
+		<div id="members_view" class="member_container"></div>
+		
+		{{ (type=="mix_select")    ? '<div class="left_arrow"></div>' : '' }}
+		{{ (type=="limitup_select")? '<div class="left_arrow"></div>' : '' }}
+		
+		{{ (type=="mix_select")    ? '<a id="mix_btn"         class="cmn_btn_1 mix_btn        "><i>合成</i></a>           ' : '' }}
+		{{ (type=="fav_select")    ? '                                                                                    ' : '' }}
+		{{ (type=="deck")          ? '<a id="deck_detail_btn" class="cmn_btn_1 deck_detail_btn"><i>デッキ<br/>詳細</i></a>' : '' }}
+		{{ (type=="sell_select")   ? '<a id="sell_btn"        class="cmn_btn_1 sell_btn       "><i>売却</i></a>           ' : '' }}
+		{{ (type=="limitup_select")? '<a id="limitup_btn"     class="cmn_btn_1 limitup_btn    "><i>限界突破</i></a>       ' : '' }}
+		{{ (type=="powerup_select")? '                                                                                    ' : '' }}
+		
+		<div class="text_hold_info"><i>※長押しで詳細が見れます</i></div>
+		<a id="toggle_status_btn" class="toggle_status_btn list_menu_btn"><i>ステータス切替</i></a>
+		<a id="sort_btn" class="sort_btn list_menu_btn"><i>攻撃力順</i></a>
+		
+		<div class="list_container">
+			<div id="card_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				<div id="card_list_view" class="card_list_container"></div>
+				<div class="bottom_spacer"></div>
+			</div>
+			<div id="info_view"></div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+			<div id="page_view"></div>
+		</div>
+		
+	</div>
+{{ __.helper.endPage() }}

@@ -1,0 +1,67 @@
+<style>
+
+</style>
+
+<hr/>
+<div>-- 売却 --</div>
+<form id="mate_sell_list">
+	<table>
+	<tr>
+	{% _.each(mate_list,function(mate,index){ %}
+		<td><input name="mate[]" value="{{ mate.id }}" type="checkbox" />{{ st.CardData[mate.card_id].name }}</td>
+		{% if (index % 6 == 0){ %}</tr><tr>{% } %}
+	{% }) %}
+	</tr>
+	</table>
+	<input class="sell_submit" type="submit" value="　売却　">
+	<input class="reset_render" type="submit" value="リセット">
+</form>
+
+<hr/>
+
+<div>
+	-- デッキ編成 --  | 
+	{% _.each(deck,function(id,index){ %}
+		{{ st.CardData[id].name }} | 
+	{% }) %}
+</div>
+<form id="deck_select">
+	<table>
+	<tr>
+	{% _.each(mate_list,function(mate,index){ %}
+		<td><input name="mate[]" value="{{ mate.id }}" type="checkbox" {% if(mate.is_deck){ %} checked="checked" {% } %} />{{ st.CardData[mate.card_id].name }}</td>
+		{% if (index % 6 == 0){ %}</tr><tr>{% } %}
+	{% }) %}
+	</tr>
+	</table>
+	<input class="deck_submit" type="submit" value="デッキ編成">
+	<input class="reset_render" type="submit" value="リセット">
+</form>
+<hr/>
+
+<div>-- 合成 -- </div>
+<form id="mix_list">
+	<table>
+	<tr>
+	{% _.each(mate_list,function(mate,index){ %}
+		<td><input name="base" value="{{ mate.id }}" type="radio" />{{ st.CardData[mate.card_id].name }}</td>
+		{% if (index % 6 == 0){ %}</tr><tr>{% } %}
+	{% }) %}
+	</tr>
+	</table>
+	
+	---------- 素材選択 ---------<br/>
+	<table>
+	<tr>
+	{% _.each(mate_list,function(mate,index){ %}
+		<td><input name="mat[]" value="{{ mate.id }}" type="checkbox" />{{ st.CardData[mate.card_id].name }}</td>
+		{% if (index % 6 == 0){ %}</tr><tr>{% } %}
+	{% }) %}
+	</tr>
+	</table>
+	<input class="mix_submit" type="submit" value="　合成　">
+	<input class="reset_render" type="submit" value="リセット">
+</form>
+
+
+{{ __.macro("dev_menu") }}

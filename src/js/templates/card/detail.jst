@@ -1,0 +1,65 @@
+{{ __.helper.startPage("card-detail","card_detail_page") }}
+	<div class="card_detail_bg"></div>
+	<div class="page_title"><i>モンスター詳細</i></div>
+	<div class="page_content">
+		<div class="card_name_container">
+			<div class="name">{{ name }}</div>
+			<div class="rarity rarity_icon_{{ rarity }}"></div>
+			<div class="attr attr_icon_{{ attribute }}"></div>
+		</div>
+		
+		<div id="cd_img" class="card_img_container">
+			<div class="card_earth_img"><img src="{{ __.path.card('earth',1) }}" width="320" height="250"></div>
+			<div class="card_l_img    "><img src="{{ __.path.card('l',gra_id)     }}" width="320" height="250"></div>
+		</div>
+		
+		{% if(type_book){ %}
+			<div class="card_status_container book">
+				<div class="el_1 lvl    ">最大Lv.{{ lvl_max }}</div>
+				<div class="el_2 lim_lvl">限界Lv.{{ lvl_max + lim_lvl_max }}</div>
+				<div class="el_3 hp     ">最大HP{{ hp_max }}</div>
+				<div class="el_4 atk    ">最大攻撃力{{ atk_max }}</div>
+				<div class="el_5 def    ">最大防御力{{ def_max }}</div>
+				<div class="el_6 mag    ">最大魔力{{ mag_max }}</div>
+			</div>
+			{{ (prev_index>0)? '<a class="prev_btn arrow_btn_1"><i>前へ</i></a>' : "" }}
+			{{ (next_index>0)? '<a class="next_btn arrow_btn_2"><i>次へ</i></a>' : "" }}
+		{% }else{ %}
+			<div class="card_status_container">
+				<div class="lvl">
+					{% if(is_max_limit){ %}
+						Lv.{{ lvl }}/({{ lvl_max }}+{{ lim_lvl }}) 限界レベル 
+					{% }else if(is_max_level){ %}
+						Lv.{{ lvl }}/({{ lvl_max }}+{{ lim_lvl }}) 最大レベル 
+					{% }else if(lim_lvl){ %}
+						Lv.{{ lvl }}/({{ lvl_max }}+{{ lim_lvl }}) 
+					{% }else{ %}
+						Lv.{{ lvl }}/{{ lvl_max }} 
+					{% } %}
+				</div>
+				<!--<div class="exp_bar_container"><div class="exp_bar" style="width:{{ exp_per * 100 }}%;"></div></div>-->
+				
+				<!-- <div class="lvl_text">{% if(is_max_level){ %}(最大レベル){% }else{ %}(次レベルまで{{ next_need_exp }}){% } %}</div> -->
+				
+				<div class="hp">HP:{{ hp }}/{{ hp_full }}</div>
+				<div class="hp_bar_container">
+					<div class="hp_bar" style="width:{{ hp_per * 100 }}%;"></div>
+				</div>
+				<div class="hp_text">{{ hp_text }}</div>
+				<div class="atk">攻撃力:{{ atk }}</div>
+				<div class="def">防御力:{{ def }}</div>
+				<div class="mag">魔力:{{ mag }}</div>
+				<div class="skill_1">
+					スキル：{{ skill_data[0].name }} {{ skill_remain_text_1 }}<br/>
+					{{ skill_data[0].discription }}<br/>
+				</div>
+				<div class="skill_2">
+					スキル：{{ skill_data[1].name }} {{ skill_remain_text_2 }}<br/>
+					{{ skill_data[1].discription }}<br/>
+				</div>
+			</div>
+		{% } %}
+		
+		<a class="close_btn cmn_btn_1"><i>閉じる</i></a>
+	</div>
+{{ __.helper.endPage() }}

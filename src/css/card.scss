@@ -1,0 +1,829 @@
+@charset "utf-8";
+@import "compass";
+@import "setting";
+
+/*==========================================================================*/
+/*** class
+============================================================================*/
+
+.status_container_2{
+	display:none;
+}
+.disp_status_2{
+	.status_container_1{
+		display:none;
+	}
+	.status_container_2{
+		display:block;
+	}
+}
+
+.card_container{
+	color:$font_white;
+	@include font_size(10px);
+	@include shadow();
+	@include img_bg("ui/card_ui/card_container_bg_1.png");
+	position:relative;
+	text-align:left;
+	
+	[state-selected="true"] & { @include img_bg("ui/card_ui/card_container_bg_2.png"); }
+	[state-fav="true"] & { @include img_bg("ui/card_ui/card_container_bg_3.png"); }
+	[state-selected="true"][state-fav="true"] & { @include img_bg("ui/card_ui/card_container_bg_4.png"); }
+	#card-mix_select [state-select_index="1"] & { @include img_bg("ui/card_ui/card_container_bg_3.png"); }
+	
+	[state-select_index] &:after {
+		@include rect(-5px,140px,14px,14px,relative);
+		@include font_size(12px);
+		background: #000;
+		display: table-cell;
+		text-align: center;
+		vertical-align: middle;
+		background: rgba(255,0,0,0.8);
+		border-radius: 8px;
+		border: solid 2px rgba(255,255,255,0.8);
+	}
+	@for $i from 1 through 6 { [state-select_index="#{$i}"] &:after { content: "#{$i}"; } }
+	#card-fav_select [state-select_index] &:after { display:none; }
+	#card-powerup_select [state-select_index] &:after { display:none; }
+	#card-limitup_select [state-select_index] &:after { display:none; }
+	//#card-limitup_select [state-select_index="1"] &:after { display:none; }
+	//@for $i from 1 through 6 { #card-limitup_select [state-select_index="#{$i}"] &:after { content: "#{$i - 1}"; } }
+	
+	div {
+		font-style: italic;
+		font-weight:normal;
+	}
+	
+	.card_status_bg_1{
+		@include position(4px,14px);
+		@include img_bg("ui/card_ui/text_card_list_status.png");
+		//display:none;
+	}
+	.lvl{
+		@include position(4px,58px);
+		width: 32px;
+	}
+	.hp_time{
+		@include position(4px,58px);
+		text-align:right;
+		width:50px;
+		color:#f6ff5e;
+	}
+	.fav_mark{
+		@include position(-2px,-2px);
+		color:#f6ff5e;
+		display:none;
+		font-style: normal;
+		@include font_size(12px);
+	}
+	[state-fav="true"] & .fav_mark{ display:block; }
+	.use_deck_mark{
+		@include position(16px,0px);
+		color:#f6ff5e;
+		display:none;
+	}
+	[state-contain_deck="true"] & .use_deck_mark{ display:block; }
+	.attr{
+		@include position(16px,35px);
+		width: 32px;
+	}
+	.attr_1{ color:#f00; }
+	.attr_2{ color:#4588FF; }
+	.attr_3{ color:#f6ff5e; }
+	.attr_4{ color:#000; }
+	.attr_5{ color:#f80; }
+	.atk{
+		@include position(31px,25px);
+		width: 32px;
+	}
+	.def{
+		@include position(31px,62px);
+		width: 32px;
+	}
+	.mag{
+		@include position(31px,100px);
+		width: 32px;
+	}
+	.hp{
+		@include position(17px,75px);
+		width: 80px;
+	}
+	.rarity{
+		@include position(30px,131px);
+		width : 27px;
+		height: 16px; 
+	}
+	
+	
+	$card_img_sample:"card/list/1.png";
+	.card_img{
+		@include position(1px,2px);
+	    width : image-width($card_img_sample)/2;
+	    height: image-height($card_img_sample)/2;
+	}
+	.hp_bar_container{
+		@include position(4px,111px);
+	}
+	.hp_bar{
+		@include position();
+	}
+	.title{
+		@include position(4px,48px);
+		width: 120px;
+	}
+	.skill_1{
+		@include position(17px,32px);
+		width: 120px;
+	}
+	.skill_2{
+		@include position(30px,16px);
+		width: 120px;
+	}
+}
+
+.card_list_page{
+	.members_bg{
+		@include img_bg("ui/card_ui/deck_bg.png");
+		@include position();
+	}
+	.text_hold_info{
+		color:#fff;
+		@include shadow();
+		@include font_size(10px);
+		@include position(84px,2px);
+	}
+	.toggle_status_btn{
+		width:96px;
+		@include position(78px,137px);
+		i{
+			left: -10px;
+			position: absolute;
+			width: 92px;
+		}
+	}
+	.sort_btn{
+		width:96px;
+		@include position(78px,226px);
+		i{
+			left: -10px;
+			position: absolute;
+			width: 92px;
+		}
+	}
+	
+	.list_container{
+		@include position(100px);
+		position:relative;
+		height:300px;
+		color:#fff;
+		
+	    .scroll_wrapper{
+    		 height:300px;
+	    }
+	    
+		.up_spacer{
+			height:27px;
+			height:8px;
+		}
+		.bottom_spacer{
+			height:35px;
+		}
+		
+		.kei_1{
+			@include position();
+		}
+		.kei_2{
+			@include position_bottom();
+		}
+		.card_list_container {
+			position:relative;
+			left:1px;
+			line-height:0px;
+			text-align:left;
+		}
+		.card_list_container > div{
+			display:inline-block;
+			position:relative;
+			position:static;
+			width:50%;
+			margin-bottom:1px;
+		}
+	}
+	#page_view{
+		@include position_bottom();
+		height:35px;
+	}
+	#info_view{
+		@include position();
+		@include img_bg("ui/card_ui/card_list_info.png");
+		display:none;
+		.card_info_container{
+			@include position(6px,17px);
+			@include font_size(10px);
+			@include shadow();
+			div{
+				display:inline-block;
+				width:auto;
+				margin-right:10px;
+				margin-right:5px;
+				min-width: 10px;
+				min-width:88px;
+				display:none;
+			}
+		}
+	}
+}
+
+
+/*==========================================================================*/
+/*** id
+============================================================================*/
+
+
+#card-index{
+	$info_height:150px;
+	.info_container{
+		@include position();
+		background-color:$bg_blue;
+		height: $info_height;
+		
+		.menu_info_bg{
+			@include img_bg("ui/card_ui/menu_info_bg.png");
+			@include position();
+		}
+		.status_bg{
+			@include position(33px,25px);
+			background-color:#061B3C;
+			height:35px;
+			width:273px;
+			
+			.status{
+				@include position(5px,12px);
+				color:$font_white;
+				@include shadow();
+				@include font_size(12px);
+				$top:15px;
+				$left:140px;
+				.status_1{ @include position($top*0,$left*0); }
+				.status_2{ @include position($top*0,$left*1); }
+				.status_3{ @include position($top*1,$left*0); }
+				.status_4{ @include position($top*1,$left*1); }
+			}
+		}
+		.deck{
+			@include position(75px,50px);
+			$left:45px;
+			.card_1{ left:($left*0); }
+			.card_2{ left:($left*1); }
+			.card_3{ left:($left*2); }
+			.card_4{ left:($left*3); }
+			.card_5{ left:($left*4); }
+			img{
+				@include position(1px,1px);
+				width :40px;
+				height:40px;
+			}
+		}
+	}
+	.list_container{
+		@include position($info_height);
+		position:relative;
+		height:($content_height - $info_height);
+		
+	    .scroll_wrapper{
+	    	height:($content_height - $info_height);
+	    }
+		
+		.kei_1{
+			@include position();
+		}
+		.kei_2{
+			@include position_bottom();
+		}
+	}
+	
+	.card_bg_s{
+		.hp_bar_container{
+			@include position(35px,1px);
+			width:40px;
+			height:6px;
+			overflow:hidden;
+		}
+		.hp_bar{
+			height:4px;
+			height:6px;
+		}
+	}
+	
+}
+
+#card-deck{
+	.member_container{
+		@include position(7px,6px);
+		$left:50px;
+		.card_1{ position:absolute; left:($left*0); }
+		.card_2{ position:absolute; left:($left*1); }
+		.card_3{ position:absolute; left:($left*2); }
+		.card_4{ position:absolute; left:($left*3); }
+		.card_5{ position:absolute; left:($left*4); }
+	}
+	.card_bg{
+		img{
+			@include position(1px,1px);
+			width :45px;
+			height:45px;
+		}
+		@include img_bg("ui/card_ui/card_bg_m.png");
+		@include position(0px,0px);
+		
+		&.target:after{
+			content:"";
+			display:block;
+			@include position();
+			@include img_bg("ui/card_ui/card_focus_m.png");
+		}
+		
+		.hp_bar_container{
+			@include position(40px,1px);
+			width:44px;
+			height:6px;
+			overflow:hidden;
+		}
+		.hp_bar{
+			height:4px;
+			height:6px;
+		}
+	}
+	.deck_detail_btn{
+		height:53px;
+		width:68px;
+		font-size  :12px;
+		line-height:14px;
+		@include position_right(3px);
+		i{
+			@include position(13px);
+		}
+	}
+	.remove_btn{
+		@include position(45px);
+		i{
+			position: absolute;
+			width: 48px;
+		}
+	}
+	
+	#info_view{
+		display:block;
+		.have_mate_num,
+		.have_game_money{ display:inline-block; }
+	}
+	.list_container{
+		.up_spacer{ height:27px; }
+	}
+}
+
+#card-sell_select{
+	.member_container{
+		@include position(7px,4px);
+		$left:45px;
+		.card_1{ position:absolute; left:($left*0); }
+		.card_2{ position:absolute; left:($left*1); }
+		.card_3{ position:absolute; left:($left*2); }
+		.card_4{ position:absolute; left:($left*3); }
+		.card_5{ position:absolute; left:($left*4); }
+		.card_6{ position:absolute; left:($left*5); }
+	}
+	.card_bg{
+		img{
+			@include position(1px,1px);
+			width :40px;
+			height:40px;
+		}
+		@include img_bg("ui/card_ui/card_bg_s.png");
+		@include position(0px,0px);
+		
+		&.target:after{
+			content:"";
+			display:block;
+			@include position();
+			@include img_bg("ui/card_ui/card_focus_s.png");
+		}
+		.hp_bar_container{display:none;}
+		
+	}
+	.sell_btn{
+		height:48px;
+		width:49px;
+		font-size  :12px;
+		line-height:14px;
+		@include position_right(3px);
+		i{
+			@include position(17px);
+		}
+	}
+	.remove_btn{
+		@include position(42px,-2px);
+	}
+	
+	#info_view{
+		display:block;
+		.have_mate_num,
+		.have_game_money,
+		.sell_price{ display:inline-block; }
+	}
+	.list_container{
+		.up_spacer{ height:27px; }
+	}
+}
+
+
+#card-mix_select{
+	.member_container{
+		@include position(7px,4px);
+		$left:43px;
+		.card_1{ position:absolute; left:($left*0 - 2); }
+		.card_2{ position:absolute; left:($left*1 + 11); }
+		.card_3{ position:absolute; left:($left*2 + 11); }
+		.card_4{ position:absolute; left:($left*3 + 11); }
+		.card_5{ position:absolute; left:($left*4 + 11); }
+		.card_6{ position:absolute; left:($left*5 + 11); }
+	}
+	.card_bg{
+		img{
+			@include position(1px,1px);
+			width :40px;
+			height:40px;
+		}
+		@include img_bg("ui/card_ui/card_bg_s.png");
+		@include position(0px,0px);
+		
+		&.target:after{
+			content:"";
+			display:block;
+			@include position();
+			@include img_bg("ui/card_ui/card_focus_s.png");
+		}
+		.hp_bar_container{display:none;}
+	}
+	.mix_btn{
+		height:48px;
+		width:49px;
+		font-size  :12px;
+		line-height:14px;
+		@include position_right(3px);
+		i{
+			@include position(6px);
+		}
+	}
+	.remove_btn{
+		@include position(42px,-2px);
+	}
+	.left_arrow{
+		@include img_bg("ui/card_ui/card_mix_arrow.png");
+		@include position(16px,46px);
+	}
+	
+	#info_view{
+		display:block;
+		.have_game_money,
+		.need_mix_money,
+		.get_mix_exp{ display:inline-block; }
+	}
+	.list_container{
+		.up_spacer{ height:27px; }
+	}
+}
+
+#card-limitup_select{
+	@extend #card-mix_select;
+	.card_bg{
+		img{
+			@include position(1px,1px);
+			width :45px;
+			height:45px;
+		}
+		@include img_bg("ui/card_ui/card_bg_m.png");
+	}
+	#members_view{
+		.card_1{ @include position(8px,10px); }
+		.card_2{ @include position(8px,73px); }
+	}
+	.left_arrow{
+		@include img_bg("ui/card_ui/card_mix_arrow.png");
+		@include position(27px,62px);
+	}
+	.limitup_btn{
+		@extend .mix_btn;
+		@include rect(13px,240px,74px,48px);
+	}
+	#info_view{
+		display:block;
+		.need_limitup_money,
+		.have_game_money{ display:inline-block; }
+		
+		.need_mix_money,
+		.get_mix_exp{ display:none; }
+		
+		display:none;
+	}
+	.list_container{
+		.up_spacer{
+			height:27px; 
+			height:8px;
+		}
+	}
+	.back_btn{
+		@include rect(215px,109px,100px,40px);
+		i{ top:3px; }
+	}
+}
+
+#card-fav_select{
+	.member_container{
+		@include position(7px,4px);
+		.card_1{
+			@include position(7px,34px);
+		}
+	}
+	.fav_btn{
+		height:52px;
+		width:82px;
+		font-size  :12px;
+		line-height:14px;
+		@include position(-5px,160px);
+		i{
+			@include position(1px);
+		}
+	}
+	.fav_remove_btn{
+		@extend .fav_btn;
+	}
+	#info_view{
+		display:block;
+		.have_mate_num,
+		.have_game_money{ display:inline-block; }
+	}
+	.list_container{
+		.up_spacer{ height:27px; }
+	}
+}
+
+#card-powerup_select{
+	.member_container{
+		@include position(7px,4px);
+		.card_1{
+			@include position(7px,34px);
+		}
+	}
+	.powerup_btn{
+		height:52px;
+		width:82px;
+		width:60px;
+		font-size  :12px;
+		line-height:14px;
+		@include position(-5px,160px);
+		i{
+			@include position(8px);
+		}
+		
+		&.levelmax{
+			@extend .powerup_btn;
+			i{ top:8px; }
+		}
+	}
+	.goto_limitup_btn{
+		height:52px;
+		width:60px;
+		font-size  :12px;
+		line-height:14px;
+		@include position(-5px,219px);
+		i{
+			@include position(2px);
+		}
+	}
+	
+	#info_view{
+		display:block;
+		.have_mate_num,
+		.have_game_money,
+		.need_powerup_money{ display:inline-block; }
+	}
+	.list_container{
+		.up_spacer{ height:27px; }
+	}
+}
+
+#card-book{
+	.card_list_page .list_container{
+		top:0px;
+		height:400px;
+		#card_list{
+			height:400px;
+		}
+		.card_list_container{
+			position:relative;
+			left:9px;
+		}
+		.book_el{
+			@include img_bg("ui/card_ui/book_bg.png");
+			font-size: 11px;
+			line-height:13px;
+			position:relative;
+			
+			.face_img{
+				@include rect(6px,6px,41px,30px);
+				text-align: center;
+			}
+			.status_1{
+				@include rect(7px,24px,116px,31px);
+				text-align: center;
+			}
+			.status_2{
+				@include rect(7px,141px,160px,31px);
+				text-align: left;
+			}
+			.has_not{
+				color:#808EB0;
+			}
+		}
+	}
+}
+
+.card_detail_page{
+	color:$font_white;
+	@include shadow();
+	@include font_size(11px);
+	
+	
+	.card_detail_bg{
+		position:absolute;
+		@include img_bg("ui/card_ui/card_detail_bg.png");
+	}
+	.card_name_container{
+		@include img_bg("ui/card_ui/card_detail_name.png");
+		@include position(2px,2px);
+		
+		.name{
+			@include position(19px);
+			@include font_size(18px);
+			width: $screen_x;
+			text-align: center;
+		}
+		.rarity{ @include position(14px,240px); }
+		.attr{ @include rect(12px,30px,30px,30px); }
+	}
+	.card_img_container{
+		@include position(55px);
+		
+		.card_earth_img{ @include position(-15px,0px); }
+		.card_l_img{ @include position(); }
+	}
+	.card_status_container{
+		@include img_bg("ui/card_ui/card_detail_status.png");
+		@include position(284px,2px);
+		
+		$left:32px;
+		.lvl              { @include position(24px,$left); }
+		.lvl_text         { @include position(24px,165px); }
+		.exp_bar_container{ @include position(24px,$left + 72); width:58px; }
+		.hp               { @include position(37px,$left); }
+		.hp_bar_container { @include position(37px,$left + 72); width:58px; }
+		.hp_text          { @include position(37px,165px); }
+		.atk              { @include position(51px,$left); }
+		.def              { @include position(51px,$left + 85); }
+		.mag              { @include position(51px,$left + 170); }
+		.skill_1          { @include position( 74px,$left); font-size:11px; line-height:13px; }
+		.skill_2          { @include position(106px,$left); font-size:11px; line-height:13px; }
+	}
+	.card_status_container.book{
+		@include img_bg("ui/card_ui/book_detail_bg.png");
+		@include position(284px,2px);
+		
+		.lvl    { @include position(29px, 32px); }
+		.lim_lvl{ @include position(29px,122px); }
+		.hp     { @include position(29px,212px); }
+		.atk    { @include position(45px, 32px); }
+		.def    { @include position(45px,122px); }
+		.mag    { @include position(45px,212px); }
+	}
+	
+	.close_btn{
+		@include position(260px,255px);
+		width:64px;
+	}
+	.prev_btn{ @include position(392px,55px); }
+	.next_btn{ @include position_right(392px,55px); }
+	
+}
+
+#gacha-index{
+	@extend #card-index;
+	.info_container{
+		.status_bg{
+			height:21px;
+		}
+		.gacha_data_text{
+			@include position(57px,24px);
+			width: 274px;
+			text-align: center;
+			font-size: 12px;
+		}
+	}
+	.gacha_info{
+		margin :-5px 0 0 0;
+		padding:0 0 5px 0;
+		@include text-shadow(1px 1px 1px #000);
+	}
+}
+.gacha_confirm_view{
+	.description_container{
+		width:286px;
+		background-color:#142c64;
+		padding:8px 0px;
+		margin:-3px 0 0 0;
+	}
+	.remain_info{
+		margin:5px 0px;
+		.remain_num{ color:#ff0; }
+	}
+	hr{ width:220px; }
+	.need_item_info{
+		text-align: center;
+		.text{
+			text-align: left;
+			display: inline-block;
+			width: initial;
+		}
+	}
+}
+
+.deck_detail_container{
+	@include rect(0px,0px,284px,246px,relative);
+	display:block;
+	.members_container{
+		@include rect(0px,0px,170px,246px);
+		background-color:#142c64;
+		padding:6px 5px 5px 6px;
+	}
+	.status_info_container{
+		@include rect(0px,175px,108px,246px);
+		background-color:#142c64;
+		text-align:left;
+		
+		.status_info{
+			@include position(10px,25px);
+			.title   { margin:10px 0px 25px -25px; text-align:center; }
+			.status_1{ margin:12px 0px; }
+			.status_2{ margin:12px 0px; }
+			.status_3{ margin:12px 0px; }
+			.status_4{ margin:12px 0px; }
+			.status_5{ margin:12px 0px; }
+			.status_6{ margin:25px 0px 25px -25px; text-align:center; }
+			.line_1{ @include rect( 40px,-20px,98px,1px); background-color:#10d9dc; }
+			.line_2{ @include rect(187px,-20px,98px,1px); background-color:#10d9dc; }
+		}
+	}   
+}
+
+.card_sort_select{
+	.select_content{
+		padding:10px 0px 10px 8px;
+		text-align: left;
+	}
+	.select_btn{
+		@include size(95px,42px);
+		i{ top:3px; }
+	}
+}
+
+.sell_confirm,
+.limitup_confirm,
+.mix_confirm{
+	.caution{
+		color:#FFFE69;
+	}
+}
+
+#card_list_view{
+	.is_empty_list{
+		@include rect(90px,10px,300px,46px);
+		padding: 15px;
+		background-color: rgba(37, 95, 150, 0.67);
+		white-space: normal;
+		border-radius: 2px;
+		border: 1px solid rgba(255, 255, 255, 0.66);
+		line-height: 15px;
+ 		text-align: center;
+	}
+	.limitup_select.is_empty_list{
+		@extend .is_empty_list;
+		@include rect(50px,10px,300px,140px);
+		padding: 15px;
+		background-color: rgba(37, 95, 150, 0.67);
+		white-space: normal;
+		border-radius: 2px;
+		border: 1px solid rgba(255, 255, 255, 0.66);
+		line-height: 15px;
+ 		text-align: left;
+	}
+}

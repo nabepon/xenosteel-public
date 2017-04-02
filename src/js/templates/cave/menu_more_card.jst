@@ -1,0 +1,13 @@
+<div id="more_get_card_list">
+	<div style="height:10px;"></div>
+	<div class="get_card_list_contaner">
+		{% _.each(member_list,function(member){ %}
+			<div class="get_card_contaner">
+				<div class="card_bg_s">
+					<img src="{{ __.path.card('s', st.CardData[ st.CardSeedData[member.card_seed_id].card_id ].gra_id ) }}">
+				</div>
+			</div>
+		{% }) %}
+	</div>
+	<div style="height:10px;"></div>
+</div>

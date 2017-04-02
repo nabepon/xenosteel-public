@@ -1,0 +1,79 @@
+
+<style>
+	textarea{
+		min-width:316px;
+		height: 30px;
+	}
+	input[type="text"]{
+		min-width:318px;
+	}
+	#sample-tools{
+		height:430px;
+		width:320px;
+	}
+	.sample-tools{
+		height:2000px;
+		width:500px;
+		position:relative;
+		display:block;
+		text-align:left;
+	}
+	
+</style>
+
+
+{{ __.helper.startPage("sample-tools") }}
+<hr/>
+	<form class="time_edit">
+		時刻設定:<input name="time" type="text" value="{{ __.moment().format('YYYY/MM/DD HH:mm:ss') }}" />
+		<input class="submit" type="submit" value="決定" />
+		<input class="reset" type="button" value="初期化" />
+	</form>
+<hr/>
+<span>■PcREC</span>
+	<form class="pc_edit">
+		<br/><table>
+		{% for(key in pc) { %}
+			<tr>
+			<td>{{ key }}</td>
+			<td><textarea name='{{ key }}' >{{ __.toJSON(pc[key]) }}</textarea></td>
+			{% /*if ( key=='deck' || key=='item_list' || key=='zukan_flag' || key=='mate_list' || key=='result' || key=='gacha_status' ){ %}
+				<td><textarea name='{{ key }}' >{{ __.toJSON(pc[key]) }}</textarea></td>
+			{% }else{ %}
+				<td><input type="text" name='{{ key }}' value='{{ __.toJSON(pc[key]) }}' /></td>
+			{% }*/ %}
+			</tr>
+		{% } %}
+		</table>
+		<input class="submit" type="submit" value="決定" /><br/>
+		<input class="reset" type="button" value="初期化" />
+	</form>
+
+<hr/>
+
+<span>■Mate</span>
+	<form class="mate_edit">
+		<table>
+			<tr><td>card_seed_id</td><td><textarea name="card_seed_id" >
+			{{ JSON.stringify(_.keys(st.CardSeedData)) }}
+			</textarea></td></tr>
+			<tr><td>lvl</td><td><textarea name="lvl" >1</textarea></td></tr>
+		</table>
+		<input class="add" type="submit" value="追加" /><br/>
+	</form>
+<hr/>
+<span>■Set Mate</span>
+	<form class="mate_get">
+		get_mate_id
+		<input type="text" name="id" value="1001" />
+		<input class="submit" type="submit" value="取得" />
+	</form>
+	<form class="mate_set">
+		set_mate
+		<input type="text" value="1" />
+		<input class="submit" type="submit" value="取得" />
+	</form>
+
+
+{{ __.macro("dev_menu") }}
+{{ __.helper.endPage() }}

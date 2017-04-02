@@ -1,0 +1,69 @@
+{{ __.helper.startPage("shop-arbeit","shop_page") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>アルバイト一覧</i></div>
+	<div class="page_content">
+		<div class="info_container">
+			<div class="menu_info_bg"></div>
+			<div class="status_bg">
+				<div class="status arbeit_info_message">
+					アプリの開発、宣伝にご協力いただくことで<br/>
+			 		魔石やコインをゲットすることができます。
+				</div>
+			</div>
+		</div>
+		
+		<div class="list_container">
+			<div id="shop_index_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				{% var remain = new __.RemainTime( { disp:{sec:false} , str:{hour:"時間",min:"分"} } ); %}
+				
+				<div id="bug_reports">
+				    <div class="description"><i>
+				    	バグ報告してコインゲット！<br/>
+				    	{{ (is_next_report_time) ? '次の報酬復活まであと <span class="time" style="color:#FFFF4E;">' + remain.toText(next_report_time) + '</span>' : '' }}
+				    </i></div>
+				    <a class="{{ (is_next_report_time) ? 'list_btn_2' : 'list_btn_1' }}"><i>バグ報告</i></a>
+				</div>
+				
+				<div id="twitter">
+				    <div class="description"><i>
+				    	<span style="color:#fff;"></span>ツイートで報酬 <span style="color:#FF8B2A;">{{ tweet_reward_num }}魔石！</span><br/>
+				    	{{ (is_next_tweet_time) ? '次の報酬復活まであと <span class="time" style="color:#FFFF4E;">' + remain.toText(next_tweet_time) + '</span>' : '' }}
+				    </i></div>
+				    <a class="{{ (is_next_tweet_time) ? 'list_btn_2' : 'list_btn_1' }}"><i>ツイッター投稿</i></a>
+				</div>
+				
+				<!--
+				<div id="phrase">
+				    <div class="description"><i>
+				    	フレーズを投稿してコインゲット！<br/>
+				    	{{ (is_next_phrase_time) ? '次の報酬復活まであと <span class="time">' + remain.toText(next_phrase_time) + '</span>' : '' }}
+				    </i></div>
+				    <a class="list_btn_1"><i>フレーズライター</i></a>
+				</div>
+				-->
+				
+				<div id="store_review">
+				    <div class="description"><i>
+				    	{% if(is_reviewed){ %}
+				    		報酬は獲得済みです
+				    	{% }else{ %}
+				    		<span style="color:#fff;">★5評価</span>すると報酬 <span style="color:#FF8B2A;">{{ review_reward_num }}魔石！</span>
+				    	{% } %}
+				    </i></div>
+				    <a class="{{ (is_reviewed) ? 'list_btn_2' : 'list_btn_1' }}"><i>アプリレビュー(初回限定)</i></a>
+				</div>
+				<div class="bottom_spacer"></div>
+			</div>
+				
+			<div class="arbeit_thanks_message">
+				ご協力ありがとうございます<br/>
+				これからもアプリを良くしていきますので<br/>
+				今後ともよろしくお願い致します<br/>
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+			<a class="trigger_back_key back_btn arrow_btn_1" data-back-default="/html/Shop/index"><i>戻る</i></a>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

@@ -1,0 +1,29 @@
+{{ __.helper.startPage("shop-index","shop_page") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>ショップ一覧</i></div>
+	<div class="page_content">
+		{{ __.macro("shop_info",response) }}
+		<div class="list_container">
+			<div id="shop_index_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				
+				{% var linkMacro = function(se,text,id,label){
+					return ""
+					       +'<div id="' +id+ '">'
+					       +'    <div class="description"><i>' +text+ '</i></div>'
+					       +'    <a class="list_btn_1" data-se="' + se + '"><i>' +label+ '</i></a>'
+					       +'</div>'
+				} %}
+				
+				{{ linkMacro(1,"魔石やコインをゲットしよう！"      ,"arbeit"   ,"アルバイト一覧"   ) }}
+				{{ linkMacro(0,"魔石を買うならこちらから！"        ,"realMoney","魔石ショップ"     ) }}
+				{{ linkMacro(1,"モンスターを捕まえる準備をしよう！","packun"   ,"パックンショップ" ) }}
+				{{ linkMacro(1,"モンスターを回復させよう！"        ,"recover"  ,"モンスター回復"   ) }}
+				
+				<div class="bottom_spacer"></div>
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

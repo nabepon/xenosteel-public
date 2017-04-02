@@ -1,0 +1,27 @@
+
+<div class="deck_detail_container">
+	<div class="members_container">
+		<div class="members">
+			{% _.each(members,function(member){ %}
+				{% if(member){ %}
+					{{ __.template("card/card_container",member) }}
+				{% }else{ %}
+					<div class="card_container"></div>
+				{% } %}
+			{% }) %}
+		</div>
+	</div>
+	<div class="status_info_container">
+		<div class="status_info">
+			<div class="title">戦闘力情報</div>
+			<div class="status_1"> 火 : {{ _.reduce(members,function(sum,member){ if(member && member.attribute==1){ sum += member.power }; return sum; },0) }}</div>
+			<div class="status_2"> 水 : {{ _.reduce(members,function(sum,member){ if(member && member.attribute==2){ sum += member.power }; return sum; },0) }}</div>
+			<div class="status_3"> 雷 : {{ _.reduce(members,function(sum,member){ if(member && member.attribute==3){ sum += member.power }; return sum; },0) }}</div>
+			<div class="status_4"> 闇 : {{ _.reduce(members,function(sum,member){ if(member && member.attribute==4){ sum += member.power }; return sum; },0) }}</div>
+			<div class="status_5"> 光 : {{ _.reduce(members,function(sum,member){ if(member && member.attribute==5){ sum += member.power }; return sum; },0) }}</div>
+			<div class="status_6">総戦闘力: {{ _.reduce(members,function(sum,member){  if(member){ sum += member.power }; return sum; },0) }}</div>
+			<div class="line_1"></div>
+			<div class="line_2"></div>
+		</div>
+	</div>
+</div>

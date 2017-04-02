@@ -1,0 +1,395 @@
+@charset "utf-8";
+@import "compass";
+@import "setting";
+
+$h2size:24px;
+$h3size:($h2size/2)+5; 
+$myurl:"http://hogehoge.com";
+
+//$bgofs_1    :0.4;
+//$bgofs_2    :0.8;
+$chip_size  : 60;
+$block      : b;
+$wall       : w;
+$floor      : f;
+$scratch_obj: s;
+$anchor     : a;
+$row        : r;
+$column     : c;
+$event_type : e;
+$object_type: o;
+$ITEM_GACHA_PT    : 4;
+$EVENT_EMPTY      : 0;
+$EVENT_GAME_MONEY : 1;
+$EVENT_REAL_MONEY : 2;
+$EVENT_GACHA_POINT: 3;
+$EVENT_ITEM       : 9;
+$EVENT_TRAP       : 10;
+$EVENT_ENEMY      : 11;
+$EVENT_MIMIC      : 12;
+$EVENT_KAIDAN     : 99;
+$MAP_TYPE_WALL    : 1;
+$MAP_TYPE_FLOOR   : 2;
+
+
+/* アニメーション */
+.object_el{
+	div.treasure_coin_img{
+		@include img_bg("map_chip/icon/0_coin.png");
+		@include rect(0px,0px,$chip_size,$chip_size);
+		opacity:0;
+	}
+	div.treasure_num{
+		@include rect(0px,-25px,$chip_size + 50px,$chip_size + px);
+		color:#FFFD65;
+		text-shadow: 0px 0px 2px #000,0px 0px 2px #000,0px 0px 2px #000;
+		font-size:16px;
+		text-align:center;
+		white-space: nowrap;
+		opacity:0;
+		.union{
+			width: initial;
+			display: inline;
+			position: relative;
+			font-size: 10px;
+		}
+	}
+	div.treasure_kirakira{
+		@include img_bg("map_chip/icon/0_kirakira.png");
+		@include rect(0px,0px,$chip_size,$chip_size);
+		opacity:0;
+	}
+	div.treasure_smoke{
+		@include img_bg("map_chip/icon/0_smoke.png");
+		@include rect(-10px,0px,$chip_size,$chip_size);
+		opacity:0;
+	}
+}
+
+
+#enemy_encounter_view{
+	@include position(0px,0px);
+}
+#stage_view.extend-battle_view{
+	position: absolute;
+	#info_view{
+		.top_info{
+			@include position();
+			@include img_bg("ui/dungeon_ui/dungeon_info_bg.png");
+			color:#fff;
+			@include text-shadow(1px 1px 1px #000);
+			
+			.top_info_el{
+				@include position(9px);
+				width: 60px;
+				text-align:
+				center;
+			}
+			.floor_info{ @extend .top_info_el; left:45px; }
+			.level_info{ @extend .top_info_el; left:149px; }
+			.enemy_info{ @extend .top_info_el; left:253px; }
+		}
+		.command_btn{
+			@include position(420px,0px);
+			@include img_bg("ui/dungeon_ui/dungeon_btn_bg.png");
+			.dungeon_main_btn{
+				@include img_bg("ui/btn/dungeon_main_btn.png");
+				text-align:center;
+				@include font_size(14px);
+				@include text-shadow(1px 1px 1px #000);
+				i{
+					position: relative;
+					top: 13px;
+				}
+			}
+			.dungeon_main_btn.hover{
+				@include img_bg("ui/btn/dungeon_main_btn_hover.png");
+			}
+			.menu_btn{ @include position(10px,13px); }
+			.info_btn{ @include position(10px,113px); i{top:7px;} }
+			.howto_btn{ @include position(10px,213px); }
+		}
+		.top_keisen{
+			@include position(34px,0px);
+			@include img_bg("ui/dungeon_ui/keisen_1.png");
+		}
+		.bottom_keisen{
+			@include position(334px,0px);
+			@include img_bg("ui/dungeon_ui/keisen_2.png");
+		}
+	}
+	#event_info_view{
+		.bottom_info{
+			@include position(314px,141px);
+			@include img_bg("ui/dungeon_ui/scrach_info_bg.png");
+			color:#fff;
+			@include text-shadow(1px 1px 1px #000);
+			
+			.bottom_info_el{
+				@include position(5px);
+				width: 30px;
+				text-align: left;
+				@include font_size(12px);
+			}
+			.item_event_info { @extend .bottom_info_el; left:85px; }
+			.enemy_event_info{ @extend .bottom_info_el; left:139px; }
+		}
+	}
+	#map_view{
+		@include position(34px);
+	}
+	#members_view{
+		@include position(337px,0px);
+		@include img_bg("ui/dungeon_ui/deck_bg.png");
+		color:#000;
+		text-align: center;
+		
+		.member_view{
+			position: relative;
+			width: 64px;
+			display: inline-block;
+			vertical-align: top;
+			
+			.chara_view{
+				position:relative; // ここのrelativeだけ、作り方の都合で違う
+			}
+		}
+	}
+}
+
+.menu_info_list_contaner{
+	height:361px;
+	text-align:left;
+	.menu_info_contaner{
+		@include img_bg("ui/dungeon_ui/menu_info_bg_1.png");
+		.title_text{
+			@include position(8px,15px);
+		}
+		.more_btn{
+			@include img_bg("ui/btn/more_btn.png");
+			@include position(3px,206px);
+		}
+		.more_btn.hover{
+			@include img_bg("ui/btn/more_btn_hover.png");
+		}
+	}
+	.menu_info_contaner.packun_info{
+		@include position(9px,6px);
+		.packun_list_contaner{
+			font-size: 12px;
+			@include position(33px,44px);
+			.packun_contaner{
+				@include img_bg("ui/dungeon_ui/packun_bg.png");
+				@include position();
+				&.packun_1{ left:0px; }
+				&.packun_2{ left:78px; }
+				&.packun_3{ left:156px; }
+			}
+			.packun_1 .packun_icon{ @include img_bg("ui/packun/1.png"); @include rect(2px,2px,43px,43px); }
+			.packun_2 .packun_icon{ @include img_bg("ui/packun/2.png"); @include rect(2px,2px,43px,43px); }
+			.packun_3 .packun_icon{ @include img_bg("ui/packun/3.png"); @include rect(2px,2px,43px,43px); }
+			.packun_num{
+				@include img_bg("ui/dungeon_ui/packun_num_bg.png");
+				@include position(38px,17px);
+				text-align:right;
+				i{
+					position:relative;
+					right: 3px;
+				}
+			}
+		}
+	}
+	.menu_info_contaner.get_item_info{
+		@include img_bg("ui/dungeon_ui/menu_info_bg_2.png");
+		@include position(106px,6px);
+		.get_item_list_contaner{
+			@include position(33px,20px);
+			font-size: 12px;
+			.get_item_contaner{
+				@include img_bg("ui/dungeon_ui/get_item_num_bg.png");
+				@include position();
+				&.coin    { left:0px;}
+				&.gacha_pt{ left:83px;}
+				&.money   { left:166px;}
+				.text{
+					@include position(2px,5px);
+				}
+				.item_num{
+					@include position(16px,0px);
+					width: 78px;
+					text-align: right;
+				}
+			}
+		}
+	}
+	.menu_info_contaner.get_phrase_info{
+		@include position(186px,6px);
+		.get_phrase_list_contaner{
+			font-size: 12px;
+			@include position(26px,10px);
+			.get_phrase_contaner{
+				width:269px;
+				border-bottom: solid 1px #10D9DC;
+				margin: 3px 0px;
+				white-space: nowrap;
+				.phrase_text{
+					width:266px;
+					overflow:hidden;
+					position:relative;
+					left:3px;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+	.menu_info_contaner.get_card_info{
+		@include position(284px,6px);
+		.get_card_list_contaner{
+			@include position(36px,0px);
+			text-align:center;
+			.card_bg_s{
+				position: relative;
+				display:inline-block;
+				margin: 0px 2px;
+			}
+		}
+	}
+}
+
+.more_get_phrase_list_view{
+	.message{
+		height:310px;
+	}
+	#more_get_phrase_list{
+		width: 300px;
+		height: 337px;
+		@include position(0px,0px);
+		overflow: hidden;
+		.phrase_contaner{
+			@include img_bg("ui/dungeon_ui/menu_info_bg_3.png");
+			position:relative;
+			left:6px;
+			text-align:left;
+			.phrase_text{
+				@include position(10px,17px);
+				height: 10px;
+				width: 254px;
+				@include font_size(12px);
+			}
+			.phrase_info{
+				@include position(54px,0px);
+				width: 270px;
+				text-align:right;
+				@include font_size(12px);
+			}
+		}
+	}
+}
+
+.more_get_card_list_view{
+	.message{
+		height:310px;
+	}
+	#more_get_card_list{
+		width: 300px;
+		height: 337px;
+		@include position(0px,13px);
+		overflow: hidden;
+		.get_card_list_contaner{
+			text-align:left;
+			.get_card_contaner{
+				width: initial;
+				display: inline-block;
+				position:relative;
+				margin: 2px;
+				.card_bg_s{
+					position:relative;
+				}
+			}
+		}
+	}
+}
+
+
+
+#cave-result{
+	.result_bg{
+		@include position();
+		@include img_bg("ui/dungeon_ui/result_bg.png");
+	}
+	.quest_title{
+		width:320px;
+		text-align:center;
+		@include position(45px);
+		font-size:16px;
+	}
+	.result_img{
+		@include position(57px,63px);
+		&.clear{ @include img_bg("ui/dungeon_ui/result_clear.png"); }
+		&.fail { @include img_bg("ui/dungeon_ui/result_fail.png");  }
+	}
+	.result_btn{
+		@include position(373px,88px)
+	}
+	.result_content{
+		@include position(190px,45px);
+		width:230px;
+		height:150px;
+		border: solid 2px rgba(145, 255, 255, 0.5);
+		background:rgba(5, 17, 36, 0.5);
+		@include border-radius(3px);
+	}
+	.result{
+		color: #fff;
+		position: relative;
+		width: 215px;
+		height: 15px;
+		border-bottom: solid 1px #94aed7;
+		left: 5px;
+		margin: 7px 0px;
+		font-size: 12px;
+		top: 3px;
+		.name{ float:left;  margin-left:2px; }
+		.num { float:right; margin-right:2px; }
+	}
+	.result_content_clear_reward{
+		@extend .result_content;
+		top:320px;
+		height:60px;
+		font-size: 12px;
+		text-align:center;
+		.clear_reward_text{
+			color:#75CAFF;
+			margin-top:7px;
+		}
+		&.first .clear_reward_text{ color:#ffff00; }
+	}
+	.exist_reward .result_btn{ top:395px; }
+	.exist_reward .result_content{ top:160px; }
+	.exist_reward .result_content_clear_reward{ top:320px; }
+	
+	.kei_1{ @include position(147px); }
+	.kei_2{ @include position(439px); }
+	
+	.result_black_screen{
+		@include rect(0px,0px,320px,480px);
+		background:#000;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

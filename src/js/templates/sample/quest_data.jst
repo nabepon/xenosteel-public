@@ -1,0 +1,88 @@
+
+sample quest_data<br/>
+<hr/>
+<style>
+	.root_table *{
+		vertical-align:top;
+	}
+	.quest_world,
+	.quest_area,
+	.quest_group,
+	.quest_name{
+		text-align:center;
+	}
+	table.root_table > tbody > tr > td{
+		border-bottom: 2px solid #aaa;
+	}
+	.floor_data{
+		border-bottom: 2px solid #aaa;
+	}
+</style>
+<table class="root_table">
+	{% _.each(questDispData,function(quest_data,id){ %}
+		<tr>
+			<td class="quest_world">world_{{ quest_data.world }}&nbsp;</td>
+			<td class="quest_area ">area_{{ quest_data.area }}&nbsp;</td>
+			<td class="quest_group">group_{{ quest_data.group }}&nbsp;</td>
+			<td class="quest_name ">{{ quest_data.name }}&nbsp;</td>
+			<td style="padding-left:10px;">
+				{% _.each(quest_data.floor_data,function(floor_data,n){ %}
+					<table class="floor_data">
+						<tr>
+							<td>
+								{{ floor_data.start_floor }}～{{ floor_data.end_floor }}&nbsp;/{{ floor_data.floor_max }}階　
+								レベル:{{ floor_data.level }}　
+							</td>
+							<td>
+								|
+								| アイテム {{ floor_data.rates.drop_item }}% |
+								| 敵       {{ floor_data.rates.enemy     }}% |
+								| ガチャpt {{ floor_data.rates.gacha_pt  }}% |
+								| 魔石     {{ floor_data.rates.kiseki    }}% |
+								| お金     {{ floor_data.rates.money     }}% |
+								| 罠       {{ floor_data.rates.trap      }}% |
+								|
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table>
+								<tr>
+									<td>
+										<table>
+											<tr>
+												<td>アイテム</td>
+											</tr>
+											{% _.each(floor_data.events.drop_item,function(item,n){ %}
+												<tr>
+													<td>　id:{{ item.id }}</td>
+													<td>　{{ item.rate / floor_data.rate_max * 100 }}%</td>
+													
+												</tr>
+											{% }) %}
+										</table>
+									</td>
+									<td>
+										<table>
+											<tr>
+												<td>敵</td>
+											</tr>
+											{% _.each(floor_data.events.enemy,function(enemy,n){ %}
+												<tr>
+													<td>　id:{{ enemy.id }}</td>
+													<td>　{{ enemy.rate / floor_data.rate_max * 100 }}%</td>
+													
+												</tr>
+											{% }) %}
+										</table>
+									</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				{% }) %}
+			</td>
+		</tr>
+	{% }) %}
+</table>

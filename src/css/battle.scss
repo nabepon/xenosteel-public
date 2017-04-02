@@ -1,0 +1,435 @@
+@charset "utf-8";
+@import "compass";
+@import "setting";
+
+$grey_color: #aaa;
+$damage_color: #FFFF77;
+
+@include keyframes(target_blink) {
+	0%      { opacity:0.6; }
+	50%     { opacity:0.0; }
+	100%    { opacity:0.6; }
+}
+
+#main_view{
+	@include position();
+	color:#fff;
+}
+.extend-battle_view,
+#battle_view{
+	@include position();
+	color:#fff;
+	
+	// 戦闘画面
+	.battle_stage_contaner{
+		.battle_stage_bg{
+			@include img_bg("ui/dungeon_ui/battle_stage_bg.png");
+			@include position(33px);
+		}
+		.battle_log_bg{
+			@include img_bg("ui/dungeon_ui/battle_log_bg.png");
+			@include position(0px);
+		}
+		.battle_deck_bg{
+			@include img_bg("ui/dungeon_ui/deck_bg.png");
+			@include position(290px);
+		}
+		.keisen_1{
+			@include img_bg("ui/dungeon_ui/keisen_1.png");
+			@include position(33px);
+		}
+		.keisen_2{
+			@include img_bg("ui/dungeon_ui/keisen_2.png");
+			@include position(288px);
+		}
+	}
+
+	// ターン切り替え
+	#battle_turn_change_view{
+		@include position();
+	}
+	
+	// 戦闘ログメッセージ
+	#battle_log_view{
+		@include position();
+		.battle_log_container{
+			@include position(5px,8px);
+			@include font_size(12px);
+			@include text-shadow(1px 1px 1px #000);
+		}
+	}
+	
+	// コマンドview関連
+	#battle_command_view{ @include position(); }
+	.battle_command_container{
+		text-align: center;
+		
+		/* コマンドの表示非表示 */
+		.target_select_view[state-enable="false"]{ visibility:hidden; }
+		&[state-enable="false"] .target_select_view{ visibility:hidden; }
+		&[state-enable="false"] .target_select_view[state-enable="true"]{ visibility:visible; }
+		&[state-enable="false"] .command_attack_info{ color:$grey_color; }
+		&[state-enable="false"] .player_command_container{ color:$grey_color; }
+		
+		// ターゲット選択マーク
+		.target_select_view{
+			.target_mark{
+				display: inline-block;
+				position: relative;
+				top:94px;
+				overflow: hidden;
+				&.is_death{ display:none; }
+				&.is_captured{ display:none; }
+				& > i{
+					display:block;
+					@include img_bg("ui/dungeon_ui/battle_target.png");
+					@include animation-name(target_blink);
+					@include animation-duration(2s);
+					@include animation-iteration-count(infinite);
+				}
+			}
+			.target_mark_contaner{
+				position:relative;
+				text-align:center;
+				vertical-align: top;
+				display: inline-block;
+			}
+			&.enemy{
+				@include rect(50px,0px,320px,0px);
+				.target_mark_contaner{
+					&.size_1{ @include size(320px,200px); }
+					&.size_2{ @include size(160px,200px); }
+					&.size_3{ @include size(106px,200px); }
+					&.size_4{ @include size( 80px,200px); }
+					&.size_5{ @include size( 64px,200px); }
+				}
+			}
+			&.member{
+				@include rect(285px,0px,320px,0px);
+				.target_mark_contaner{
+					@include size(64px,90px);
+				}
+				.target_mark{ @include position(0px,-3px); }
+			}
+			&.show_detail{
+				@include rect(285px,0px,320px,0px);
+				.target_mark_contaner{
+					@include size(64px,90px);
+				}
+			}
+		}
+		
+		// 攻撃は目標をタップしてください
+		.command_attack_info{
+			@include rect(263px,0px,320px,0px);
+			font-size: 10px;
+		}
+		
+		// コマンド選択エリア
+		.player_command_bg{
+			@include img_bg("ui/dungeon_ui/battle_btn_bg.png");
+			@include position(373px);
+		}
+		.player_command_container{
+			@include position(385px);
+		
+			.command_btn{
+				text-align:center;
+				line-height: 28px;
+				@include img_bg("ui/btn/battle_main_btn.png");
+				@include text-shadow(1px 1px 1px #000);
+				> i{ @include position(8px, 0px, relative); }
+				&.hover{ @include img_bg("ui/btn/battle_main_btn_hover.png"); }
+			}
+			
+			.command_capture      { @include position(0px,13px); }
+			.command_guard        { @include position(0px,162px); }
+			.command_skill.skill_1{ @include position(46px,13px); }
+			.command_skill.skill_2{ @include position(46px,162px); }
+			.command_skill{
+				@include font_size(12px);
+				> i{top:14px;}
+				.remain_bg{
+					@include img_bg("ui/dungeon_ui/skill_remail_bg.png");
+					@include position(28px,73px);
+					.remain_text{ @include position(3px,3px,relative,top_left); float:left; }
+					.remain_num { @include position(3px,3px,relative,top_right); float:right; }
+				}
+			}
+			[state-remain="false"].command_skill{ color:$grey_color; }
+			
+			.command_howto{
+				@include img_bg("ui/btn/battle_help_btn.png");
+				@include position(-382px,289px);
+				&.hover{ @include img_bg("ui/btn/battle_help_btn_hover.png"); }
+			}
+		}
+	}// end battle_command_container
+	
+	
+	/* Charas */
+	.charas_view{
+		.chara_view{}
+		.hp_view{
+			.chara_hp_num_bg{}
+			.chara_hp_num{ color:#fff; }
+			.chara_hp_container{
+				@include img_bg("ui/dungeon_ui/deck_hp_bg.png");
+				@include size(62px, 10px);
+				position:relative;
+				display:inline-block;
+				border: solid #FFF 2px;
+				@include border-radius(4px);
+				overflow: hidden;
+				
+				.chara_hp_diff{
+					@include rect(0px, 0px, 0px, 7px);
+					@include transform-origin(left,top);
+					background:#f00;
+				}
+				.chara_hp_bar{
+					@include img_bg("ui/dungeon_ui/deck_hp.png");
+					@include rect(0px, 0px, 100%, 7px);
+					text-align:left;
+				}
+			}
+		}
+		.turn_view{
+			@include rect(0px,0px,30px,0px);
+			.chara_turn_num{
+				text-align:left;
+				@for $i from 0 through 9 {
+					.num#{$i} {
+						display:inline-block;
+						@include img_bg("ui/num/battle/#{$i}.png");
+						@include size(13px,17px);
+					}
+				}
+			}
+		}
+		
+		/* Charas Member */
+		&.member{
+			@include position(291px);
+			.chara_view{
+				opacity:1;
+				@include rect(0px,0px,64px,0px);
+				@include img_bg("ui/dungeon_ui/deck_frame_bg.png");
+				.chara_frame{ @include img_bg("ui/dungeon_ui/deck_frame_2.png"); @include position(); }
+				
+				&[state-death="true"]{ opacity:0.4; }
+				&[state-is_action_turn="true"] .chara_turn_mark{
+					background:rgba(255,255,0,0.4);
+					@include rect(0px, 0px, 64px, 64px);
+				}
+				
+				.chara_img_container{
+					@include position();
+					img { @include size(64px,64px); }
+				}
+				
+			}
+			.hp_view{
+				@include rect(53px,0px,64px,0px);
+				text-align:center;
+				.chara_hp_container{ width:100%; }
+				.attr_icon{ @include rect(-18px,0px,20px,20px); }
+				//&[state-death="true"]{ opacity:0; }
+				
+				.chara_hp_num_bg{
+					@include img_bg("ui/dungeon_ui/deck_frame_1.png");
+					@include position(-54px,0px);
+				}
+				.chara_hp_num{
+					@include position(15px,3px,"",top_right);
+					text-align: right;
+					@include font_size(10px);
+				}
+				&[state-death="true"] .chara_hp_num{ color:$grey_color; }
+			}
+		}
+		
+		/* Charas Enemy */
+		&.enemy{
+			@include position(142px);
+			.chara_view{
+				@include position();
+				opacity:1;
+				.chara_img_container{
+					@include position(-106px,-160px);
+					img { @include size(320px,250px); }
+				}
+				&[state-death="true"]{ opacity:0; }
+				&[state-captured="true"]{ opacity:0; }
+			}
+			.hp_view{
+				@include position(95px);
+				text-align:center;
+				.chara_hp_container{ width:80%; }
+				.attr_icon{ @include rect(-20px,10%,20px,20px); }
+				&[state-death="true"]{ opacity:0; }
+			}
+			.chara_hp_num{
+				@include position(15px,3px,"",top_right);
+				text-align: right;
+				@include font_size(10px);
+			}
+			.turn_view{
+				.chara_turn_num{
+					text-align: right;
+					position: absolute;
+					right: 11%;
+				}
+			}
+		}
+		
+		
+		/* エフェクト */
+		.chara_effect_view{
+			//@include rect(0px,0px,67px,50px, absolute);
+			@include rect(0px,0px,64px,50px, absolute);
+			text-align: center;
+			
+			// 被ダメージエフェクト
+			.effect_chara_damage{
+				@include rect(0px,0px,50px,50px, relative);
+				display: inline-block;
+				//background:#ff0;
+				//opacity:0.5;
+				.hit_smoke{
+					@include position(-14px,-14px);
+					opacity:0;
+					@include img_bg("battle/fx/hit_fx_2.png");
+				}
+				.hit_mark {
+					@include position(-14px,-14px);
+					opacity:0;
+					@include img_bg("battle/fx/hit_fx_1.png");
+				}
+				.chara_hp_diff_num{
+					@include rect(10px,0px, 100%, 0px);
+					@include text-shadow(0px 0px 1px #000,0px 0px 1px #000,1px 1px 1px #000);
+					display:inline-block;
+					color:$damage_color;
+					font-size:16px;
+				}
+			}
+			
+			// 攻撃エフェクト
+			.effect_chara_attack{
+				display: inline-block;
+				background:#ff0;
+				opacity:0;
+			}
+			&.member .effect_chara_attack{
+				@include img_bg("battle/fx/attack_fx.png");
+				@include rect(-50px,0px,50px,50px, relative);
+			}
+			&.enemy .effect_chara_attack{
+				@include img_bg("battle/fx/attack_fx_enemy.png");
+				@include rect(90px,0px,50px,50px, relative);
+			}
+			
+			// 防御エフェクト
+			.guard_icon{ @include img_bg("ui/dungeon_ui/battle_icon_guard.png"); }
+			&[state-death="true"] .guard_icon{ opacity:0; }
+				
+			&.member .icon_contaner{
+				.guard_icon{ @include position(2px,0px); }
+			}
+			&.enemy .icon_contaner{
+				position: absolute;
+				left: 10%;
+				width: 80%;
+				text-align: center;
+				.guard_icon{ @include position(74px,20px); }
+				.capture_icon_container{ width:0px; height:0px; display:inline-block; }
+				.capture_icon.packun_50{ display: inline-block; @include img_bg("ui/packun/1_close.png"); @include rect(24px,-35px,70px,70px,relative); }
+				.capture_icon.packun_51{ display: inline-block; @include img_bg("ui/packun/2_close.png"); @include rect(24px,-35px,70px,70px,relative); }
+				.capture_icon.packun_52{ display: inline-block; @include img_bg("ui/packun/3_close.png"); @include rect(24px,-35px,70px,70px,relative); }
+			}
+			.effect_chara_guard{
+				display: inline-block;
+				opacity:0;
+				@include img_bg("battle/fx/guard.png");
+			}
+		}
+	}// end charas_view
+	
+	#full_screen_effect_view{
+		@include position();
+		.capture_effect_container{
+			@include rect(35px,0px,320px,253px);
+			.flash{
+				@include rect(0px,0px,320px,253px);
+				background:#fff;
+				opacity:0;
+			}
+			.packun_50 .packun_icon{ @include img_bg("ui/packun/1.png"); @include rect(56px,90px,140px,140px); }
+			.packun_51 .packun_icon{ @include img_bg("ui/packun/2.png"); @include rect(56px,90px,140px,140px); }
+			.packun_52 .packun_icon{ @include img_bg("ui/packun/3.png"); @include rect(56px,90px,140px,140px); }
+			.packun_50 .packun_icon_close{ @include img_bg("ui/packun/1_close.png"); @include rect(56px,90px,140px,140px); }
+			.packun_51 .packun_icon_close{ @include img_bg("ui/packun/2_close.png"); @include rect(56px,90px,140px,140px); }
+			.packun_52 .packun_icon_close{ @include img_bg("ui/packun/3_close.png"); @include rect(56px,90px,140px,140px); }
+			.smoke_container{
+				@include rect(125px,-34px,78px,78px);
+				opacity:0;
+			}
+			.smoke{
+				@include img_bg("battle/fx/hit_fx_2.png");
+				@include position(0px,0px);
+			}
+			.result_text_success{ @include img_bg("battle/fx/capture_success.png"); @include position(205px,60px); }
+			.result_text_fail   { @include img_bg("battle/fx/capture_fail.png");    @include position(205px,60px); }
+		}
+	}
+}
+
+#popup_view{
+	.skill_select_popup{
+		display: block;
+		top : 310px;
+		position: absolute;
+		height: initial;
+		
+		.cmn_win_root1{
+			background: rgba(0,0,0,0);
+		}
+		.black_screen_1,
+		.black_screen_2{
+			background: rgba(0,0,0,0.5);
+			width:320px;
+			@include position();
+		}
+		
+		&.select_enemy{
+			top : 310px;
+			.black_screen_1{ height: 40px; top: -320px; }
+			.black_screen_2{ height: 233px; top: -63px; }
+		}
+		
+		&.select_member{
+			top : 90px;
+			.black_screen_1{ height: 220px; top: -62px; }
+			.black_screen_2{ height: 94px; top: 297px; }
+		}
+	}
+	
+	.capture_target_select_popup{
+		@extend .skill_select_popup;
+		.black_screen_1{ height: 40px; top: -320px; }
+		.black_screen_2{ height: 233px; top: -63px; }
+	}
+	
+	.capture_confirm_inner{
+		/* cave.scssのmenu_info_list_contaner */
+		height: 124px;
+		.menu_info_contaner.packun_info{
+			top:39px;
+		}
+	}
+	
+	.battle_result_popup{
+		.reward{ color:#FFFF77; }
+	}
+}

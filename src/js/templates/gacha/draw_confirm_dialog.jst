@@ -1,0 +1,39 @@
+<div class="gacha_confirm_inner">
+	
+	<div class="description_container">
+		<div class="confirm_text">
+			{% if(st.GachaListData[gacha.id].draw_num<0){ %}
+				{{ gacha.name }}を {{ gacha.draw_num }}回引きますか？
+			{% }else{ %}
+				{{ gacha.name }}を引きますか？
+			{% } %}
+		</div>
+		<div class="description">
+			{{ gacha.description }}
+		</div>
+	</div>
+	
+	{% if(gacha.limit_num>0){ %}
+		<div class="remain_info">
+			このガチャは <i class="limit_num">{{ gacha.limit_num }}回</i> まで引けます<br/>
+			残りあと <i class="remain_num">{{ gacha.limit_num-gacha.draw_cnt }}回</i> 引けます<br/>
+		</div>
+	{% } %}
+	
+	<hr/>
+	<div class="need_item_info">
+		<div class="text">
+			所持{{ item.name }}：{{ have_item }}{{ item.count_name }}<br/>
+			消費{{ item.name }}：{{ gacha.price }}{{ item.count_name }}<br/>
+		</div>
+	</div>
+	<hr/>
+	
+	<div class="debug_info" style="display:{{ (appenv.BUILD_LEVEL == appenv.DEBUG_BUILD)?'block':'none' }};">
+		<br/>終了日： {{ st.GachaListData[gacha.id].end }}
+		<br/>復活日： {{ revival_text }}
+		<br/>復活まであと： {{ revival_remain }}
+		<br/>復活確率： {{ revival_per }}％
+		<br/>あと {{ alive_remain }} で消えます
+	</div>
+</div>

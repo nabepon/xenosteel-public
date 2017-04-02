@@ -1,0 +1,5 @@
+{% if(is_show){ %}
+	<div class="paee_num"><i>{{ current }} / {{ page_max }}</i></div>
+	<a class="prev_page_btn arrow_btn_1 {{ is_first ? "is_first" : "" }}"><i>前へ</i></a>
+	<a class="next_page_btn arrow_btn_2 {{ is_end   ? "is_end"   : "" }}"><i>次へ</i></a>
+{% } %}

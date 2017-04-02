@@ -1,0 +1,50 @@
+{{ __.helper.startPage("quest-select_cave_view") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>ダンジョン一覧</i></div>
+	<div class="page_content">
+		<div class="word_map_container">
+			<div  id="area_map_img" class="map_img_wrapper">
+				<div class="world_map_img"></div>
+				<div class="world_map_icon_container" style=" position:absolute; left:{{ map_icon_data.map_pos_x }}px; top :{{ map_icon_data.map_pos_y }}px;">
+					{% _.each(map_icon_data.icon_id,function(id,n,data){ %}
+						{% if(map_icon_data.icon_id[n] != 0){ %}
+							<img 
+								class="world_map_icons"
+								src="{{ __.path.world_map_icon(map_icon_data.icon_id[n]) }}"
+								style="
+									height:30px;
+									width:30px;
+									position:absolute;
+									left:{{ map_icon_data.icon_x[n] }}px;
+									top :{{ map_icon_data.icon_y[n] }}px;
+							">
+						{% } %}
+					{% }) %}
+				</div>
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+			<div class="area_name"><i>{{ area.area_name }}</i></div>
+		</div>
+		<div class="list_container">
+			<div id="cave_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				{% _.each(quest_list,function(quest,n){ %}
+					<a class="area_list_btn list_btn_{{ (quest.world_id<100)? 1 : (quest.world_id<500)? 3 : 5 }} E_select_quest" data-after_se="1" data-quest_id="{{ quest.id }}" >
+						<i>{{ quest.dungeon_name }}</i>
+						{% if( quest.clear_flag >= 1 ){ %}
+							<div class="quest_clear_icon"></div>
+						{% }else if( quest.play_flag == 0 ){ %}
+							<div class="quest_new_icon"></div>
+						{% } %}
+					</a>
+				{% }) %}
+				<div class="bottom_spacer"></div>
+			</div>
+			<div class="please_select_2"><i>ダンジョンを選択してください</i></div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+			<a class="trigger_back_key back_to_area_select arrow_btn_1" data-back-default="/html/Quest/selectArea"><i>戻る</i></a>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

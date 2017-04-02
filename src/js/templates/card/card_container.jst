@@ -1,0 +1,31 @@
+
+<div class="card_container">
+	<img class="card_img" src="{{ __.path.card('list',gra_id) }}" />
+	
+	<div class="status_container_1">
+		<div class="card_status_bg_1"></div>
+		<div class="lvl">{{ (is_max_limit)?"限界":(is_max_level)?"最大":lvl }}</div>
+		<div class="fav_mark">★</div>
+		<div class="use_deck_mark">使用中</div>
+		<div class="attr attr_{{ attribute }}">[{{ __.helper.attrText(attribute) }}]</div>
+		<div class="atk">{{ atk }}</div>
+		<div class="def">{{ def }}</div>
+		<div class="mag">{{ mag }}</div>
+		<div class="hp" >{{ hp  }} / {{ hp_full }}</div>
+		<div class="hp_time">{{ hp_text }}</div>
+		<div class="hp_bar_container">
+			<div class="hp_bar" style="width:{{ hp_per * 100 }}%;"></div>
+		</div>
+	</div>
+	
+	<div class="status_container_2">
+		<div class="fav_mark">★</div>
+		<div class="use_deck_mark">使用中</div>
+		<div class="title  ">スキル</div>
+		<div class="skill_1">{{ skill_data[0].name }}</div>
+		<div class="skill_2">{{ skill_data[1].name }}</div>
+	</div>
+	
+	<div class="rarity rarity_icon_{{ rarity }}"></div>
+</div>
+

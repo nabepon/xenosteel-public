@@ -1,0 +1,238 @@
+@charset "utf-8";
+@import "compass";
+@import "setting";
+
+/* フロア開始演出 */
+.floor_change_container{
+	
+	.num_container{
+		@include position(170px,0px);
+		width:320px;
+	}
+	
+	.before_num_container,
+	.after_num_container{
+		background-color:rgba(0,0,0,0.5);
+		background:url();
+		display:block;
+		position:relative;
+		text-align:center;
+		height:84px;
+		width:320px;
+		
+		.num0{ background: url(../img/anim/floor-change/0.png); }
+		.num1{ background: url(../img/anim/floor-change/1.png); }
+		.num2{ background: url(../img/anim/floor-change/2.png); }
+		.num3{ background: url(../img/anim/floor-change/3.png); }
+		.num4{ background: url(../img/anim/floor-change/4.png); }
+		.num5{ background: url(../img/anim/floor-change/5.png); }
+		.num6{ background: url(../img/anim/floor-change/6.png); }
+		.num7{ background: url(../img/anim/floor-change/7.png); }
+		.num8{ background: url(../img/anim/floor-change/8.png); }
+		.num9{ background: url(../img/anim/floor-change/9.png); }
+		.numF{ background: url(../img/anim/floor-change/F.png); }
+		.num0,.num1,.num2,.num3,.num4,.num5,.num6,.num7,.num8,.num9,.numF{ height:84px; width:80px; display:inline-block; margin:0px -15px ;}
+		
+	}
+}
+
+.powerup_anim_container{
+	@include position();
+	.chara_container{
+		@include position(120px,0px);
+		.chara{
+			@include size(320px,250px);
+		}
+	}
+	.fx_container{
+		@include position(-40px,0px);
+		div{ @include position(); }
+		.halo_2    { @include img_bg("anim/powerup/halo_2.png"); }
+		.halo_1    { @include img_bg("anim/powerup/halo_1.png"); }
+		.text      { @include img_bg("anim/powerup/text.png"); }
+		.text_light{ @include img_bg("anim/powerup/text_light.png"); }
+	}
+	.result_container{
+		@include rect(350px,20px,280px,100px,relative);
+		background-color: rgba(32, 71, 95, 0.70);
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+		border: 2px rgba(255, 255, 255, 0.73) solid;
+		border-radius: 3px;
+		
+		.after{ color:#FFFE69; }
+	}
+}
+
+.limitup_anim_container{
+	@include position();
+	.chara_container{
+		@include position(120px,0px);
+		.chara{
+			@include size(320px,250px);
+		}
+	}
+	.fx_container{
+		@include position(-40px,0px);
+		div{ @include position(); }
+		.halo_2    { @include img_bg("anim/limitup/halo_2.png"); }
+		.halo_1    { @include img_bg("anim/limitup/halo_1.png"); }
+		.break     { @include img_bg("anim/limitup/break.png"); }
+		.break_fx  { @include img_bg("anim/limitup/break.png"); }
+		.text      { @include img_bg("anim/limitup/text.png"); }
+		.text_light{ @include img_bg("anim/limitup/text_light.png"); }
+	}
+	.result_container{
+		@include rect(350px,20px,280px,100px,relative);
+		background-color: rgba(32, 71, 95, 0.70);
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+		border: 2px rgba(255, 255, 255, 0.73) solid;
+		border-radius: 3px;
+		
+		.after{ color:#FFFE69; }
+	}
+}
+
+.loginbonus_anim_container{
+	@include position();
+	.fx_container{
+		@include position(-40px,0px);
+		div{ @include position(); }
+		.halo_2     { @include img_bg("anim/login_bonus/halo_2.png"); }
+		.halo_1     { @include img_bg("anim/login_bonus/halo_1.png"); }
+		.text       { @include img_bg("anim/login_bonus/text.png"); }
+		.text_light { @include img_bg("anim/login_bonus/text_light.png"); }
+	}
+	.bonus_list_container{
+		@include position(150px,42px);
+		.bonus      { opacity:0; }
+		.bonus_1    { @include position(  0px,0px); @include img_bg("anim/login_bonus/1.png"); }
+		.bonus_2    { @include position( 50px,0px); @include img_bg("anim/login_bonus/2.png"); }
+		.bonus_3    { @include position(100px,0px); @include img_bg("anim/login_bonus/3.png"); }
+		.bonus_4    { @include position(150px,0px); @include img_bg("anim/login_bonus/4.png"); }
+		.bonus_light{ @include img_bg("anim/login_bonus/bonus_light.png"); }
+		.get_text   {
+			@include position(-7px,78px);
+			@include img_bg("anim/login_bonus/get.png");
+		}
+		.bonus_shade{
+			background-color: rgba(0, 0, 0, 0.6);
+			@include rect(7px,7px,223px,37px);
+			position: absolute;
+		}
+	}
+	.btn_container{
+		@include position(370px,0px);
+		.next_bonus_text{
+			@include size(320px,19px);
+			text-align: center;
+			color: #FF0000;
+			i{ color: #FF0; }
+		}
+		.ok_btn{
+			@include position(30px,110px);
+			width:100px;
+		}
+	}
+}
+
+.gacha_anim_container{
+	@include position();
+	div{ @include position(); }
+	.reflection{ @include img_bg("anim/gacha/reflection.png"); }
+	.circle_container{
+		@include position(65px,0px);
+		.circle_1 .img   { @include img_bg("anim/gacha/circle_1.png"); }
+		.circle_1 .rotate{ @include img_bg("anim/gacha/circle_1.png"); background:url();}
+		.circle_2 .img   { @include img_bg("anim/gacha/circle_2.png"); }
+		.circle_2 .rotate{ @include img_bg("anim/gacha/circle_2.png"); background:url();}
+		.circle_3 .img   { @include img_bg("anim/gacha/circle_3.png"); }
+		.circle_3 .rotate{ @include img_bg("anim/gacha/circle_3.png"); background:url();}
+		.flare           { @include img_bg("anim/gacha/flare.png"); }
+	}
+	.break_container{
+		@include position();
+		.break_1   { @include img_bg("anim/gacha/break_1.png"); }
+		.break_2   { @include img_bg("anim/gacha/break_2.png"); }
+		.break_3   { @include img_bg("anim/gacha/break_3.png"); }
+	}
+	.debris_container{
+		@include position();
+		.debris_1     { @include position(  41px,   7px); @include img_bg("anim/gacha/debris_1.png");  background:url();}
+		.debris_1 .img{ @include position(   0px,   0px); @include img_bg("anim/gacha/debris_1.png"); }
+		.debris_2     { @include position(  56px,  -9px); @include img_bg("anim/gacha/debris_2.png");  background:url();}
+		.debris_2 .img{ @include position(   0px,   0px); @include img_bg("anim/gacha/debris_2.png"); }
+		.debris_3     { @include position(-120px,-115px); @include img_bg("anim/gacha/debris_3.png");  background:url();}
+		.debris_3 .img{ @include position(   0px,   0px); @include img_bg("anim/gacha/debris_3.png"); }
+	}
+	
+	.gacha_result_container{
+		.result_card{ opacity:0; }
+		.card_name_container{
+			@include img_bg("anim/gacha/card_detail_name.png");
+			@include position(270px,0px);
+			.name{
+				@include position(19px);
+				@include font_size(18px);
+				width: $screen_x;
+				text-align: center;
+			}
+			.rarity{ @include position(14px,240px); }
+			.attr{ @include rect(12px,30px,30px,30px); }
+		    .new_icon{
+		    	@include img_bg_size("ui/quest/new.png",88px,21px);
+		    	@include position(-10px,0px);
+		    }
+		}
+		.card_img{ @include rect(25px,0px,320px,250px); }
+		.card_skill_container{
+			@include img_bg("anim/gacha/skill_detail.png");
+			@include position(325px,3px);
+			.skill_1 { @include position(24px,32px); font-size:11px; line-height:13px; }
+			.skill_2 { @include position(56px,32px); font-size:11px; line-height:13px; }
+		}
+	}
+}
+
+.bossencounter_anim_container{
+	@include position();
+	div{ @include position(); }
+	.keep_out_container{
+		@include position();
+		.img    { @include img_bg("anim/encounter_boss/keep_out.png"); }
+		.rotate { @include img_bg("anim/encounter_boss/keep_out.png");  background:url();}
+		.keep_out_1{ #{$prefix}transform: translate(-60px, 184px) translateZ(0px) scale(1, 1) rotateZ(-24deg); }
+		.keep_out_2{ #{$prefix}transform: translate(-30px,  98px) translateZ(0px) scale(1, 1) rotateZ(-12deg); }
+		.keep_out_3{ #{$prefix}transform: translate(-30px, 222px) translateZ(0px) scale(1, 1) rotateZ( 10deg); }
+		.keep_out_4{ #{$prefix}transform: translate(-30px, 235px) translateZ(0px) scale(1, 1) rotateZ(-15deg); }
+		.keep_out_5{ #{$prefix}transform: translate(-70px, 101px) translateZ(0px) scale(1, 1) rotateZ( 24deg); }
+	}
+	.shadow_container{
+		@include position();
+		.img     { @include img_bg("anim/encounter_boss/shadow.png"); }
+		.shadow_1{ @include position(190px, 20px); }
+		.shadow_2{ @include position(190px, 90px); }
+		.shadow_3{ @include position(190px,160px); }
+		.shadow_4{ @include position(190px,230px); }
+	}
+	.text_container{
+		@include position();
+		.text_1{ @include position(124px, 15px); }
+		.text_2{ @include position(124px, 85px); }
+		.text_3{ @include position(124px,155px); }
+		.text_4{ @include position(124px,225px); }
+		
+		.img{ #{$prefix}transform-origin:center bottom; }
+		.text_1 .img{ @include img_bg("anim/encounter_boss/text_1.png"); }
+		.text_2 .img{ @include img_bg("anim/encounter_boss/text_2.png"); }
+		.text_3 .img{ @include img_bg("anim/encounter_boss/text_3.png"); }
+		.text_4 .img{ @include img_bg("anim/encounter_boss/text_4.png"); }
+	}
+}
+
+
+
+

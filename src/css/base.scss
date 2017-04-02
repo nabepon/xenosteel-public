@@ -1,0 +1,769 @@
+@charset "utf-8";
+@import "compass";
+@import "setting";/* 変数など */
+@import "test";
+
+/*==========================================================================*/
+/* header */
+/** reset
+/** util 
+/** base views
+/** z-index manage
+/** force GPU
+/** ui parts
+/** btn parts
+/** indicator
+/** footer
+/** iScroll
+/** dialog
+/** 仮
+/*==========================================================================*/
+
+/*==========================================================================*/
+/** font
+/*==========================================================================*/
+
+//@font-face {  font-family: "rounded-l-mgenplus-1m-regular"; src: url("../font/rounded-l-mgenplus-1m-regular.woff") format('woff');}
+@font-face {  font-family: "mgenplus-1m-regular"; src: url("../font/mgenplus-1m-regular.woff") format('woff');}
+@font-face {  font-family: "Boku2-Bold"; src: url("../font/Boku2-Bold.woff") format('woff');}
+@font-face {  font-family: "Yasashisa"; src: url("../font/Yasashisa.woff") format('woff');}
+
+/*==========================================================================*/
+/** reset
+/*==========================================================================*/
+body{
+	margin:0;
+	padding:0; 
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	word-break: break-all;
+	font-family: Arial, 'Yasashisa', HiraKakuProN-W6, 'mgenplus-1m-regular', 'Meiryo', 'dummy' ;
+	font-weight:bold;
+	font-size:14px;
+	line-height:15px;
+	background:rgba(255,255,255,0.5);
+	background:rgba(0,0,0,0.2);
+	white-space:nowrap;
+	color:#fff;
+}
+
+hr{ font-size:4px; line-height:5px; }
+i { font-style:normal; }
+a,div{
+	@include box-sizing(border-box);
+}
+a {
+	text-decoration:none;
+	display:inline-block;
+	position:relative;
+	font-size:14px;
+	line-height:25px;
+}
+table{ white-space:nowrap; }
+td,tr,table,div,span,p,ul,li {
+	margin:0;
+	padding:0; 
+	border:0px solid #000;
+	border-spacing: 0px;
+	list-style-type:none;
+	font-style:normal;
+}
+input,textarea{
+	outline-offset: -0px;
+	outline: -webkit-focus-ring-color auto 0px;
+	margin:0px 2px;
+}
+input[type="button"],
+input[type="submit"]{
+	@include background(linear-gradient(top, #fff, #aaa));
+	@include border-radius(10px);
+}
+input[type="button"]:hover,
+input[type="submit"]:hover{
+	@include background(linear-gradient(top, #fff, #aaa));
+	@include border-radius(10px);
+}
+div,section{
+	width : 100%;
+}
+
+/*==========================================================================*/
+/** util 
+/*==========================================================================*/
+.touch_callout_on { -webkit-user-select:auto; }
+.hide { display:none; }
+.clear { clear:both; }
+
+
+/*==========================================================================*/
+/** base views
+/*==========================================================================*/
+#device_display{
+	width:($screen_x);
+	height:($screen_y);
+	background:#000;
+}
+#body{
+	height:100%;
+	height:($screen_y);
+	overflow:hidden;
+	background:#fff;
+	position:relative;
+}
+#display_view{
+	position:absolute;
+}
+#preload_view{
+	position:absolute;
+	top:-1px;
+	left:-1px;
+	height:1px;
+	width:1px;
+	overflow:hidden;
+}
+#preload_view img{
+	height:1px;
+	width:1px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	opacity:0;
+}
+#dev_view{
+	color:#000;
+}
+#touch_effect{
+	@include rect(-15px,-15px,30px,30px);
+	@include border-radius(15px);
+	background:#fff;
+	opacity:0;
+	display:none;
+}
+
+
+/*==========================================================================*/
+/** z-index manage
+/*==========================================================================*/
+
+#popup_view *{
+	z-index:1000;
+}
+#indicator_view *{
+	z-index:2000;
+}
+#touch_effect{
+	z-index:3000;
+}
+
+#battle_view .charas_view .chara_effect_view {
+	z-index:1;
+}
+#battle_view #battle_container #battle_command_view{
+	z-index:10;
+}
+#battle_view #full_screen_effect_view {
+	z-index:20;
+}
+
+.floor_change_container{
+	z-index:100;
+}
+.skill_select_popup{
+	z-index:10;
+}
+
+
+/*==========================================================================*/
+/** force GPU
+/*==========================================================================*/
+
+#cmn_win_root1,
+#indicator_view,
+#battle_view,
+.floor_change_container,
+#enemy_encounter_view,
+.black_screen,
+#dummy{
+	transform: translate(0px,0px) translateZ(0px);
+	* { transform: translate(0px,0px) translateZ(0px); }
+}
+
+
+/*==========================================================================*/
+/** ui parts
+/*==========================================================================*/
+.page_content{
+	@include position($title_height);
+	height:$content_height;
+}
+.page_title{
+	@include position();
+	@include img_bg("ui/common/title.png");
+	text-align:center;
+	i{
+		position:relative;
+		top:6px;
+		color:$font_white;
+		@include shadow();
+		font-size: 14px;
+		line-height: 15px;
+	}
+}
+
+.list_bg{
+	position:absolute;
+	left:0px;
+	top:0px;
+	@include img_bg("ui/common/list_bg_1.jpg");
+}
+.card_list_bg{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width :100%;
+	height:$screen_y;
+	height:128px;
+	background:$bg_blue;
+}
+.card_detail_bg{
+	position:absolute;
+	@include img_bg("ui/card_ui/card_detail_bg.png");
+}
+.kei_1{
+	@include img_bg("ui/common/kei_list_up.png");
+}
+.kei_2{
+	@include img_bg("ui/common/kei_list_bottom.png");
+}
+.world_map_img{
+	@include img_bg("ui/common/map.jpg");
+}
+.up_spacer{
+	height:25px;
+	height:15px;
+	width:320px;
+}
+.bottom_spacer{
+	height:25px;
+	height:15px;
+}
+.card_bg_s{
+	@include img_bg("ui/card_ui/card_bg_s.png");
+	@include position(0px,0px);
+	display:inline-block;
+	img {
+		@include position(1px,1px);
+		width :40px;
+		height:40px;
+	}
+}
+.card_bg_m{
+	@include img_bg("ui/card_ui/card_bg_m.png");
+	@include position(0px,0px);
+}
+.prev_page_btn{
+	@include position();
+}
+.next_page_btn{
+	@include position_right();
+}
+.prev_page_btn.is_first{ display:none; }
+.next_page_btn.is_end{ display:none; }
+.paee_num{
+	text-align:center;
+	width:100%;
+	height:20px;
+	color:$font_white;
+	@include shadow();
+	background:rgba(0,0,0,0.5);
+	@include position(15px);
+	i{
+		position:relative;
+		top:2px;
+	}
+}
+.rarity_icon_1{ @include img_bg("ui/rarity/rarity_1.png"); }
+.rarity_icon_2{ @include img_bg("ui/rarity/rarity_2.png"); }
+.rarity_icon_3{ @include img_bg("ui/rarity/rarity_3.png"); }
+.rarity_icon_4{ @include img_bg("ui/rarity/rarity_4.png"); }
+
+.attr_icon_1{ @include img_bg("ui/attr_icon/attr_1.png"); }
+.attr_icon_2{ @include img_bg("ui/attr_icon/attr_2.png"); }
+.attr_icon_3{ @include img_bg("ui/attr_icon/attr_3.png"); }
+.attr_icon_4{ @include img_bg("ui/attr_icon/attr_4.png"); }
+.attr_icon_5{ @include img_bg("ui/attr_icon/attr_5.png"); }
+
+.hp_bar_container{
+	width:43px;
+	height:8px;
+	background-color:#3c3c3c;
+	border:1px solid #000;
+	overflow: hidden;
+}
+.hp_bar{
+	width:20px;
+	height:6px;
+	height:8px;
+	background-color:#ff0;
+}
+
+.exp_bar_container{
+	border:1px solid #000;
+	width:43px;
+	height:8px;
+	background-color:#3c3c3c;
+	@include border-radius(2px);
+	overflow: hidden;
+}
+.exp_bar{
+	width:20px;
+	height:6px;
+	height:8px;
+	background-color:#0085FF;
+	@include border-radius(2px);
+}
+
+span.batch{
+	& > i{
+		@include size(14px,14px);
+		@include font_size(12px);
+		background: #000;
+		display: table-cell;
+		text-align: center;
+		vertical-align: middle;
+		background: rgba(255, 0, 0, 0.8);
+		border-radius: 8px;
+		border: solid 2px rgba(255, 255, 255, 0.8);
+	}
+}
+
+/*==========================================================================*/
+/** btn parts
+/*==========================================================================*/
+.btn{
+	text-align:center;
+}
+.btn_text{
+	position:relative;
+	color:$font_white;
+	@include shadow();
+	font-size:12px;
+	top:7px;
+	display:inline-block;
+	text-align:center;
+	width:100%;
+}
+.arrow_btn_1             { @extend .btn; @include img_bg("ui/btn/arrow_btn_1.png");       }
+.arrow_btn_1.hover       {               @include img_bg("ui/btn/arrow_btn_1_hover.png"); }
+.arrow_btn_1 i           { @extend .btn_text; top: 6px;}
+
+.arrow_btn_2             { @extend .btn; @include img_bg("ui/btn/arrow_btn_2.png");       }
+.arrow_btn_2.hover       {               @include img_bg("ui/btn/arrow_btn_2_hover.png"); }
+.arrow_btn_2 i           { @extend .btn_text; top: 6px;}
+
+.arrow_btn_3             { @extend .btn; @include img_bg("ui/btn/arrow_btn_3.png");       }
+.arrow_btn_3.hover       {               @include img_bg("ui/btn/arrow_btn_3_hover.png"); }
+
+.arrow_btn_4             { @extend .btn; @include img_bg("ui/btn/arrow_btn_4.png");       }
+.arrow_btn_4.hover       {               @include img_bg("ui/btn/arrow_btn_4_hover.png"); }
+
+.mypage_menu_btn         { @extend .btn; @include img_bg("ui/btn/mypage_menu_btn.png");       }
+.mypage_menu_btn.hover   {               @include img_bg("ui/btn/mypage_menu_btn_hover.png"); }
+.mypage_menu_btn i       { @extend .btn_text; top:3px; font-size: 11px; }
+
+.list_btn_1              { @extend .btn; @include img_bg("ui/btn/list_btn_1.png"); margin-bottom: 4px; }
+.list_btn_1.hover        {               @include img_bg("ui/btn/list_btn_1_hover.png"); }
+.list_btn_1 i            { @extend .btn_text; @include font_size(15px); top:8px;}
+
+.list_btn_2              { @extend .btn; @include img_bg("ui/btn/list_btn_2.png"); margin-bottom: 4px; }
+.list_btn_2.hover        {               @include img_bg("ui/btn/list_btn_2_hover.png"); }
+.list_btn_2 i            { @extend .btn_text; @include font_size(15px); top:8px; color: #E5E5E5;}
+
+.list_btn_3              { @extend .btn; @include img_bg("ui/btn/list_btn_3.png"); margin-bottom: 4px; }
+.list_btn_3.hover        {               @include img_bg("ui/btn/list_btn_3_hover.png"); }
+.list_btn_3 i            { @extend .btn_text; @include font_size(15px); top:8px;}
+
+.list_btn_4              { @extend .btn; @include img_bg("ui/btn/list_btn_4.png"); margin-bottom: 4px; }
+.list_btn_4.hover        {               @include img_bg("ui/btn/list_btn_4_hover.png"); }
+.list_btn_4 i            { @extend .btn_text; @include font_size(15px); top:8px;}
+
+.list_btn_5              { @extend .btn; @include img_bg("ui/btn/list_btn_5.png"); margin-bottom: 4px; }
+.list_btn_5.hover        {               @include img_bg("ui/btn/list_btn_5_hover.png"); }
+.list_btn_5 i            { @extend .btn_text; @include font_size(15px); top:8px;}
+
+.list_menu_btn           { height: 20px; width : 50px; line-height:20px; font-size: 10px;}
+.list_menu_btn           { @include border_image_bg("ui/btn/list_menu_btn.png", 0 20 20 20 , 0px 10px 10px 10px, true ); }
+.list_menu_btn.hover     { @include border_image_bg("ui/btn/list_menu_btn_hover.png", 0 20 20 20 , 0px 10px 10px 10px, true ); }
+.list_menu_btn i         { @extend .btn_text; left: 0px; top: 0px; line-height: 20px; font-size: 10px; }
+
+@for $i from 1 through 5 {
+	.cmn_btn_#{$i}           { @include font_size(12px); height: 48px; width : 50px;}
+	.cmn_btn_#{$i}           { @include border_image_bg("ui/btn/cmn_btn_#{$i}.png", 24, 12px, true); }
+	.cmn_btn_#{$i}.hover     { @include border_image_bg("ui/btn/cmn_btn_#{$i}_hover.png", 24, 12px, true); }
+	.cmn_btn_#{$i} i         { @extend .btn_text; left: 0px;}
+}
+
+.result_btn               { @extend .btn; @include img_bg("ui/btn/result_btn.png");       }
+.result_btn.hover         {               @include img_bg("ui/btn/result_btn_hover.png"); }
+.result_btn i             { @extend .btn_text; top:8px; font-size: 16px; }
+
+
+/*==========================================================================*/
+/** indicator
+/*==========================================================================*/
+@include keyframes(indicator_blink) {
+	0%      { opacity:1.0; }
+	50%     { opacity:0.4; }
+	100%    { opacity:1.0; }
+}
+#indicator_view{
+	color:#fff;
+	width:($screen_x);
+	height:($screen_y);
+	background:rgba(0,0,0,0.25);
+	display:block;
+	position:absolute;
+	left:0px;
+	top :0px;
+	i{
+		display:block;
+		@include img_bg("ui/common/indicator.png");
+		position:absolute;
+		left:130px;
+		top:210px;
+		opacity:1;
+		@include animation-name(indicator_blink);
+		@include animation-duration(2s);
+		@include animation-iteration-count(100);
+	}
+}
+
+/*==========================================================================*/
+/** footer
+/*==========================================================================*/
+$footer_img: "ui/common/footer_bg.png";
+$footer_btn_img_1      : "ui/btn/footer_btn_1.png";
+$footer_btn_img_1_hover: "ui/btn/footer_btn_1_hover.png";
+$footer_btn_img_2      : "ui/btn/footer_btn_2.png";
+$footer_btn_img_2_hover: "ui/btn/footer_btn_1_hover.png";
+#footer_view{
+    width : image-width($footer_img)/2;
+    height: image-height($footer_img)/2;
+	bottom: 0px;
+	left  : 0px;
+	position: absolute;
+}
+#footer_container{
+    @include img_bg($footer_img);
+	text-align:center;
+	
+	a{
+		position:absolute;
+		position:relative;
+		left:0px;
+		right:0px;
+		top:3px;
+		@include img_bg($footer_btn_img_2);
+		
+		text-align:center;
+		@include font_size(12px);
+		color:#fff;
+		@include shadow();
+		
+		.batch{ @include position(-19px,0px,"","top_right"); }
+		
+	}
+	a.hover{
+		background: url($img + $footer_btn_img_2_hover);
+		@include background-size(100% 100%);
+	}
+	a i{
+		position:relative;
+		top:18px;
+	}
+	
+	a.active{
+		background: url($img + $footer_btn_img_1);
+		@include background-size(100% 100%);
+	}
+	a.active.hover{
+		background: url($img + $footer_btn_img_1_hover);
+		@include background-size(100% 100%);
+	}
+	.card    .text{  @include position(-1px,0px); @include img_bg("ui/common/footer_text_card.png");   }
+	.dungeon .text{  @include position(-1px,0px); @include img_bg("ui/common/footer_text_dungeon.png");}
+	.gacha   .text{  @include position(-1px,0px); @include img_bg("ui/common/footer_text_gacha.png");  }
+	.mypage  .text{  @include position(-1px,0px); @include img_bg("ui/common/footer_text_mypage.png"); }
+	.shop    .text{  @include position(-1px,0px); @include img_bg("ui/common/footer_text_shop.png");   }
+}
+
+/*==========================================================================*/
+/** iScroll
+/*==========================================================================*/
+.scroller {
+	position:relative;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	float:left;
+	padding:0;
+	left:0px;
+	width : auto;
+	white-space:normal;
+    text-align:center;
+}
+.scroll_wrapper{
+	 overflow:hidden;
+}
+.scrollbarV {
+	position:absolute;
+	z-index:100;
+	z-index:0;
+	width:5px;
+	bottom:7px;
+	top:2px;
+	right:3px;
+}
+.scrollbarV > div {
+	position:absolute;
+	z-index:100;
+	z-index:0;
+	width:100%;
+	background:#373737;
+	border:1px solid #373737;
+	background: #8FB6B0;
+	border: 1px solid #8FB6B0;
+	background: #FFF;
+	border: 1px solid #373737;
+	@include background-clip(padding-box);
+	@include box-sizing(border-box);
+	@include border-radius(4px);
+}
+.iScrollVerticalScrollbar{
+	position: absolute;
+	z-index: 9999;
+	z-index:0;
+	width: 7px;
+	bottom: 2px;
+	top: 2px;
+	right: 1px;
+	overflow: hidden;
+	pointer-events: none;
+}
+.iScrollVerticalScrollbar > div {
+	box-sizing: border-box;
+	position: absolute;
+	border: 1px solid rgba(255, 255, 255, 0.901961);
+	border-radius: 3px;
+	width: 100%;
+	transition-duration: 0ms;
+	-webkit-transition-duration: 0ms;
+	display: block;
+	height: 187px;
+	transform: translate(0px, 0px) translateZ(0px);
+	transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+	-webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+	background: rgba(0, 0, 0, 0.498039);
+}
+
+
+/*==========================================================================*/
+/** dialog
+/*==========================================================================*/
+
+// popupを真ん中に寄せるためのtable
+.cmn_win_root_table{
+	position:absolute;
+	top:0px;
+	left:0px;
+	height: $screen_y;
+	height: 100%;
+	background:rgba(0,0,0,0.5);
+	/*opacity: 0;*/
+}
+
+// popupを真ん中に寄せるためのtableのtd
+.cmn_win_root_td{
+	text-align:center;
+	vertical-align:middle;
+}
+
+// cmn_win_root_td直下、inline-blockのcontainer
+.cmn_win_container{
+	display:inline-block;
+	@include transform(scale(1));
+}
+
+// アニメーション
+@include keyframes(cmn_win_opacity) {
+	0%      { opacity:0; }
+	100%    { opacity:1; }
+}
+@include keyframes(cmn_win_scale) {
+	0%      { #{$prefix}transform:scale(0.95,0.95); }
+	100%    { #{$prefix}transform:scale(1,1); }
+}
+.cmn_win_root_table{
+	@include animation-name(cmn_win_opacity);
+	@include animation-duration(0.3s);
+}
+.cmn_win_container{
+	@include animation-name(cmn_win_scale);
+	@include animation-duration(0.3s);
+}
+
+@include keyframes(cmn_win_close_opacity) {
+	0%      { opacity:1; }
+	100%    { opacity:0; }
+}
+@include keyframes(cmn_win_close_scale) {
+	0%      { #{$prefix}transform:scale(1,1); }
+	100%    { #{$prefix}transform:scale(0.95,0.95); }
+}
+.close .cmn_win_root_table{
+	opacity:0;
+	@include animation-name(cmn_win_close_opacity);
+	@include animation-duration(0.25s);
+}
+.close .cmn_win_container{
+	#{$prefix}transform:scale(0.95,0.95);
+	@include animation-name(cmn_win_close_scale);
+	@include animation-duration(0.25s);
+}
+
+// popupの下地
+.cmn_win_bg{
+	display:block;
+	position:absolute;
+	height:100%;
+	width:100%;
+	@include box-sizing(border-box);
+	@include border_image_bg("ui/common/cmn_win_010.png", 52, 26px);
+}
+
+// ウィンドウサイズを縦横両方を指定
+.cmn_win_min_size{
+	display:table-cell;
+	position: relative;
+	vertical-align:middle;
+	height:126px;
+	width:320px;
+}
+// popupとコンテンツのマージンを指定
+.cmn_win_margin{
+	display:inline-block;
+	width: auto;
+	padding:9px;
+}
+
+//中コンテンツの縦位置調整。横は自動。
+.cmn_win_pos{
+	position: relative;
+	top: 0px;
+}
+
+// メッセージ部分のtable
+.dialog_message_container{
+	display:block;
+	position:relative;
+	border-radius:2px;
+	white-space:normal;
+	min-height: 64px;
+}
+
+// タイトルBG
+.dialog_message_title{
+	@include img_bg("ui/common/cmn_win_010_title.png");
+	width:300px;
+	margin:1px;
+}
+// タイトルテキスト
+.dialog_message_title .title{
+	color:#fff;
+	text-shadow: 0px 1px 2px #000;
+	display:inline-block;
+	font-size:14px;
+	position:relative;
+	top:4px;
+}
+
+// コンテンツコンテナー
+.dialog_message_text{
+	min-height:73px;
+	text-align:left;
+	position:relative;
+	left: 1px;
+	width: 301px;
+	width:300px;
+}
+.dialog_message_text.center{
+	text-align:center;
+}
+
+// コンテンツBG
+#popup_view .dialog_message_text_bg{
+	width: 301px;
+	width:300px;
+	height:100%;
+	position:absolute;
+	@include box-sizing(border-box);
+	@include border_image_bg("ui/common/cmn_win_010_content.png", 52, 26px);
+}
+
+// コンテンツ
+.dialog_message_text .message{
+	text-shadow: 0px 1px 2px #000;
+	text-align:left;
+	font-size:13px;
+	line-height:16px;
+	display:inline-block;
+	margin:0px 8px;
+	padding:12px 0px;
+}
+.dialog_message_text.center{
+	width:auto;
+}
+
+// コンテンツの中身を寄せるためのtable
+.common_dialog_message{
+	height:73px;
+	text-align:left;
+	width:302px;
+	vertical-align:middle;
+	position:relative;
+}
+.common_dialog_message.center{
+	text-align:center;
+	white-space:normal;
+}
+
+// コンテンツの中身を寄せるためのtableの中のi要素
+.dialog_message_text.center .message{
+	text-align:center;
+}
+
+/* ボタン部分 */
+.yes_btn,
+.no_btn,
+close_btn{
+	@include font_size(12px);
+	height: 40px;
+	min-width: 120px;
+	margin: 0px 10px;
+	@include border_image_bg("ui/btn/cmn_btn_2.png", 24, 12px, true);
+	&.hover{ @include border_image_bg("ui/btn/cmn_btn_2_hover.png", 24, 12px, true); }
+	& > i {
+		@extend .btn_text;
+		left: 0px;
+		top: 3px;
+	}
+}
+
+
+
+/*==========================================================================*/
+/** 仮
+/*==========================================================================*/
+/* debug用
+.e99{
+	background: rgba(255,255,255,0.5);
+}
+*/
+

@@ -1,0 +1,56 @@
+{{ __.helper.startPage("top-mypage") }}
+	<div class="page_title"><i>マイページ</i></div>
+	<div id="map_view" class="page_content">
+		<div id="mypage_map" class="map_img_wrapper">
+			<div class="world_map_img"></div>
+		</div>
+		<a class="on_back_key back_to_mypage arrow_btn_1 hide"><i>戻る</i></a>
+		<div class="kei_1"></div>
+		<div class="kei_2"></div>
+	</div>
+	<div id="info_view" class="page_content">
+		<div class="chara_bg"></div>
+		<div class="chara chara_{{ chara_type }}" data-chara_type="{{ chara_type }}"></div>
+		<div class="status" style="display:none;">
+			<div class="status_0">名前:{{ pc.name }}</div>
+			<div class="status_1">最大到達深度:test</div>
+			<div class="status_2">所持モンスター:{{ mate_num }}/{{ mate_max }}</div>
+			<div class="status_3">発見モンスター:{{ zukan_num }}</div>
+			<div class="status_4">ログイン日数:{{ login_count }}</div>
+			<div class="status_5">クリアダンジョン数:test</div>
+			<div class="status_6">所持ガチャpt:{{ gacha_point }}</div>
+			<div class="status_7">所持コイン:{{ game_money }}</div>
+			<div class="status_8">所持魔石:{{ real_money }}</div>
+		</div>
+		<div class="mission_contaner">
+			<div class="mission_title">ミッション(タップで詳細)</div>
+			<div id="mission_item_container">
+				<div style="height:6px;"></div>
+				{% _.times(2,function(times){ _.each(mission_list,function(mission){ %}
+					{% if(times==0 && !mission.is_clear){ return } %}
+					{% if(times==1 &&  mission.is_clear){ return } %}
+					<a class="mission mission_item_bg {{ mission.kind }}" data-mission_id="{{ mission.id }}">
+						<div class="mission_item_text">{{ mission.kind }} {{ mission.title }}</div>
+						{{ (mission.is_clear)?'<div class="mission_clear_icon"></div> ':'' }}
+					</a>
+					{% if(mission.guerrilla_end_text){ %}
+						<div class="mission_time_text">└残り {{ mission.guerrilla_end_text }}┘</div>
+					{% }else if(mission.end_text){ %}
+						<div class="mission_time_text">└{{ mission.end_text }} まで┘</div>
+					{% } %}
+				{% }) }) %}
+			</div>
+		</div>
+		
+		<div class="menu_btns">
+			<a class="menu_0 mypage_menu_btn information"><i>お知らせ</i></a>
+			<a class="menu_1 mypage_menu_btn present    "><i>プレゼント</i><span class="batch" style="{{ (present_num)?'' :'display:none;' }}"><i>{{ present_num }}</i></span></a>
+			<a class="menu_2 mypage_menu_btn how_to     "><i>遊び方</i></a>
+			<a class="menu_3 mypage_menu_btn phrase_dict"><i>フレーズ辞典</i></a>
+			<a class="menu_4 mypage_menu_btn config     "><i>設定</i></a>
+			<a class="menu_5 mypage_menu_btn other_menu "><i>メニュー</i></a>
+		</div>
+		<a class="chara_change arrow_btn_1"><i>変更</i></a>
+		<a class="goto_map arrow_btn_2"><i>地図</i></a>
+	</div>
+{{ __.helper.endPage() }}

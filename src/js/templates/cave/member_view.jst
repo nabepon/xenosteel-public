@@ -1,0 +1,19 @@
+<!--
+{{ member.id }}: {{ member.name }}<br/>
+Lv:{{ member.lvl }} 属性:{{ member.attribute }}<br/>
+HP:{{ member.hp }}/{{ member.hp_full }}<br/>
+-->
+<div class="chara_view member">
+	<div class="chara_img_container">
+		<img src="{{ __.path.card("s",member.gra_id) }}">
+	</div>
+	<div class="chara_frame"></div>
+</div>
+<div class="hp_view member">
+	<div class="chara_hp_num_bg"></div>
+	<div class="chara_hp_num">{{ member.hp }}/{{ member.hp_full }}</div>
+	<div class="chara_hp_container">
+		<i class="chara_hp_bar" style="width:{{ (member.hp / member.hp_full * 100).floor() }}%;"></i>
+	</div>
+	<img class="attr_icon" src="{{ __.path.img_ui('attr_icon/attr_' + member.attribute + '.png') }}">
+</div>

@@ -1,0 +1,161 @@
+@charset "utf-8";
+@import "compass";
+@import "setting";
+
+/*==========================================================================*/
+/*** id
+============================================================================*/
+
+$shop_info_height: 80px;
+$thanks_message_height: 48px;
+$info_height:$shop_info_height;
+
+.shop_page{
+	.packun_50{ @include img_bg("ui/packun/1.png"); display:inline-block; @include size(16px,16px); vertical-align: middle; margin-top: -2px; }
+	.packun_51{ @include img_bg("ui/packun/2.png"); display:inline-block; @include size(16px,16px); vertical-align: middle; margin-top: -2px; }
+	.packun_52{ @include img_bg("ui/packun/3.png"); display:inline-block; @include size(16px,16px); vertical-align: middle; margin-top: -2px; }
+	.info_container{
+		@include position();
+		background-color:$bg_blue;
+		height: $info_height;
+		
+		.menu_info_bg{
+			@include img_bg("ui/shop/shop_info_bg.png");
+			@include position(5px,0px);
+		}
+		.status_bg{
+			@include position(22px,25px);
+			background-color:#061B3C;
+			height:35px;
+			width:273px;
+			
+			.status{
+				@include position(5px,12px);
+				color:$font_white;
+				@include shadow();
+				@include font_size(12px);
+				$top:15px;
+				$left:140px;
+				.status_1{ @include position($top*0,$left*0); }
+				.status_2{ @include position($top*0,$left*1); }
+				.status_3{ @include position($top*1,$left*0); }
+				.status_4{ @include position($top*1,$left*1); }
+				
+				&.arbeit_info_message{
+					@include position(3px,0px);
+					font-size:11px;
+					line-height: 16px;
+					text-align:center;
+				}
+			}
+		}
+	}
+	.list_container{
+		@include position($info_height);
+		position:relative;
+		height:($content_height - $info_height);
+		.up_spacer {
+			height: 10px;
+		}
+		.bottom_spacer {
+			height: 0px;
+		}
+		
+	    .scroll_wrapper{
+	    	height:($content_height - $info_height);
+	    }
+		
+		.kei_1{
+			@include position();
+		}
+		.kei_2{
+			@include position_bottom();
+		}
+		.back_btn{
+			@include position(-11px,0px);
+		}
+		
+		.description{
+			background:rgba(0,0,0,0.5);
+			min-height: 28px;
+			width :240px;
+			position:relative;
+			top:3px;
+			top:2px;
+			display:inline-block;
+			padding:5px;
+			margin-top: 3px;
+			i{
+				color:$font_white;
+				@include shadow();
+				@include font_size(12px);
+			}
+		}
+		
+		.title{
+			background:rgba(0,0,0,0.5);
+			height: 28px;
+			width :240px;
+			position:relative;
+			top:-2px;
+			display:inline-block;
+			padding:5px;
+			i{
+				color:$font_white;
+				@include shadow();
+				@include font_size(12px);
+			}
+		}
+	}
+}
+
+#shop-arbeit{
+	.list_container{
+		height:($content_height - $info_height - $thanks_message_height);
+	}
+	.arbeit_thanks_message{
+		@include rect(270px,0px,320px,$thanks_message_height);
+		@include font_size(10px);
+		background-color: rgba(0, 0, 0, 0.5);
+		padding: 10px 0px;
+		text-align: center;
+	}
+}
+
+#shop-real_money{
+	.list_container{
+		height:($content_height - 78px);
+	}
+	.info_message{
+		@include rect(240px,0px,320px,78px);
+		@include font_size(10px);
+		background-color: rgba(0, 0, 0, 0.5);
+		padding: 10px 10px;
+		text-align: left;
+		white-space: normal;
+	}
+}
+
+#shop-arbelt_bug_reports{
+	.form_container{
+		@include border_image_bg("ui/common/generic_bg_1.png", 30, 15px);
+		@include rect(75px,16px,288px,216px);
+		
+		.name_container, .mail_container, .content_container{ margin-bottom:5px; }
+		input,textarea{ width:250px; padding-left:2px; padding-right:2px; }
+		.form_content{ height:70px; }
+		
+		.btn_container{
+			@include position(205px,15px);
+			.cancel{
+				width:110px;
+				@include position(0px,0px);
+			}
+			.submit{
+				width:110px;
+				@include position(0px,118px);
+			}
+		}
+	}
+}
+

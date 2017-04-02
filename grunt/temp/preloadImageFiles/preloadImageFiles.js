@@ -1,0 +1,15 @@
+var preloadImageFiles =[
+'card_ui/card_detail_bg.png',
+'card_ui/card_detail_status.png',
+'card_ui/card_container_bg_1.png',
+'card_ui/card_container_bg_2.png',
+'card_ui/card_container_bg_3.png',
+'common/cmn_win_010.png',
+'common/cmn_win_010_content.png',
+'common/cmn_win_010_title.png',
+'common/generic_bg_1.png',
+'common/indicator.png',
+'common/list_bg_1.jpg',
+'common/map.jpg',
+'mypage/mypage_bg.png',
+]

@@ -1,0 +1,27 @@
+{{ __.helper.startPage("shop-packun","shop_page") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>パックンショップ</i></div>
+	<div class="page_content">
+		{{ __.macro("shop_info",response) }}
+		<div class="list_container">
+			<div id="shop_index_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				
+				{% _.each(packun_keys,function(key,n){ %}
+					<div class="description"><i>
+						<span class="packun_{{ key }}"></span>{{ st.ItemData[key].name }}<br/>{{ packun_data[key][0].text }}
+					</i></div>
+					{% _.each(packun_data[key],function(packun){ %}
+						<a class="list_btn_1 buy_packun" data-after_se="1" data-id="{{ packun.id }}"><i>{{ packun.num }}個購入 {{ packun.price }}{{ st.ItemData[packun.need_item].name }}</i></a>
+					{% }) %}
+					<div class="spacer" style="height:5px;"></div>
+				{% }) %}
+				
+				<div class="bottom_spacer"></div>
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+			<a class="trigger_back_key back_btn arrow_btn_1" data-back-default="/html/Shop/index"><i>戻る</i></a>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

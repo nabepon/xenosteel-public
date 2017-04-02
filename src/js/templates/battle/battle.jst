@@ -1,0 +1,139 @@
+<div id="battle_container">
+	
+	<!-- 戦闘背景 -->
+	<div id="battle_bg_view">
+		<div class="battle_stage_contaner">
+			<div class="battle_canvas_bg"></div>
+			<div class="battle_stage_bg"></div>
+			<div class="battle_log_bg"></div>
+			<div class="battle_deck_bg"></div>
+			<div class="keisen_1"></div>
+			<div class="keisen_2"></div>
+		</div>
+	</div>
+	
+	<!-- 味方一覧 -->
+	<div id="battle_members_view" class="member charas_view">
+		
+		<!-- 画像 -->
+		<div class="chara_list_container member"></div>
+		<script data-class="chara_view" type="text/template" id="chara_view_template">
+			<div class="chara_img_container">
+				<img src="<%= __.path.card(img_type, gra_id) %>">
+			</div>
+			<div class="chara_turn_mark"></div>
+			<div class="chara_frame"></div>
+		</script>
+		
+		<!-- HP -->
+		<div class="hp_list_container"></div>
+		<script data-class="hp_view" type="text/template" id="hp_view_template">
+			<div class="chara_hp_num_bg"></div>
+			<div class="chara_hp_num"><%= hp %>/<%= hp_full %></div>
+			<div class="chara_hp_container">
+				<i class="chara_hp_diff" style="width:100%; -webkit-transform: scale( <%= hp/hp_full %> , 1);"></i>
+				<i class="chara_hp_bar"  style="width:<%= hp*100/hp_full %>%;"></i>
+			</div>
+			<img class="attr_icon" src="<%= __.path.img_ui('attr_icon/attr_'+ attribute +'.png') %>">
+		</script>
+		
+		<!-- ターン数 -->
+		<div class="turn_list_container"></div>
+		<script data-class="turn_view" type="text/template" id="turn_view_template">
+			<% if(disp_turn >= 0){ %>
+				<div class="chara_turn_num"><%= __.helper.toNumClass(disp_turn) %></div>
+			<% } %>
+		</script>
+		
+		<!-- エフェクト表示用 -->
+		<div class="chara_effect_list_container member"></div>
+		<script data-class="chara_effect_view" type="text/template" id="chara_effect_view_template">
+			<div class="icon_contaner"></div>
+		</script>
+		
+	</div>
+	
+	<!-- 敵一覧 基本構造は味方と同じ -->
+	<div id="battle_enemys_view" class="enemy charas_view">
+		<div class="chara_list_container enemy"></div>
+		<div class="hp_list_container enemy"></div>
+		<div class="turn_list_container enemy"></div>
+		<div class="chara_effect_list_container enemy"></div>
+	</div>
+	
+	<!-- ターン切り替え演出表示用コンテナ -->
+	<div id="battle_turn_change_view"></div>
+	<script type="text/template" id="battle_turn_change_view_template"></script>
+	
+	<!-- 戦闘ログ -->
+	<div id="battle_log_view"></div>
+	<script type="text/template" id="battle_log_view_template">
+		<div class="battle_log_container">
+			<div class="text_1"><%= messages[0] %></div>
+			<div class="text_2"><%= messages[1] %></div>
+		</div>
+	</script>
+	
+	<!-- コマンド画面 -->
+	<div id="battle_command_view"></div>
+	<script type="text/template" id="battle_command_view_template">
+		<div class="battle_command_container">
+			
+			<div class="target_select_view enemy">
+				<% _.each(enemys,function(enemy,n){ %>
+					<span class="target_mark_contaner command_enemy_select command_attack enemy_<%= n+1 %> size_<%= enemys.length %>" data-enemy_id="<%= enemy.id %>" >
+						<span class="target_mark <%= (enemy.hp <= 0)?'is_death':'is_alive' %> <%= (enemy.captured)?'is_captured':'' %>" data-enemy_id="<%= enemy.id %>">
+							<i data-enemy_id="<%= enemy.id %>"></i>
+						</span>
+					</span>
+				<% }) %>
+			</div>
+			
+			<div class="target_select_view show_detail">
+				<% _.each(members,function(member,n){ %>
+					<div class="target_mark_contaner command_member_detail member_<%= n+1 %>" data-member_id="<%= member.id %>" ></div>
+				<% }) %>
+			</div>
+			
+			<div class="target_select_view member">
+				<% _.each(members,function(member,n){ %>
+					<span class="target_mark_contaner command_member_select member_<%= n+1 %>" data-member_id="<%= member.id %>" >
+						<span class="target_mark <%= (member.hp <= 0)?'is_death':'is_alive' %> <%= (member.captured)?'is_captured':'' %>" data-member_id="<%= member.id %>">
+							<i data-member_id="<%= member.id %>"></i>
+						</span>
+					</span>
+				<% }) %>
+			</div>
+			
+			<div class="command_attack_info">攻撃は目標をタップしてください</div>
+			
+			<div class="player_command_bg"></div>
+			<div class="player_command_container">
+				<% if(appenv.BUILD_LEVEL==appenv.DEBUG_BUILD){ %><a class="command_debug" style="position:absolute; top:-350px; left:0px;">【デバッグ】</a><% } %>
+				<a class="command_btn command_howto"></a>
+				<a class="command_btn command_capture"><i>つかまえる</i></a>
+				<a class="command_btn command_guard"><i>ぼうぎょ</i></a>
+				<a class="command_btn command_skill skill_1" data-skill-slot="0" state-remain="<%= (!!member.skill_data[0].use_remain) %>">
+					<i><%= member.skill_data[0].name %></i>
+					<i class="remain_bg">
+						<i class="remain_text">残り</i>
+						<i class="remain_num"><%= member.skill_data[0].use_remain %>/<%= member.skill_data[0].use_max %></i>
+					</i>
+				</a>
+				<a class="command_btn command_skill skill_2" data-skill-slot="1" state-remain="<%= (!!member.skill_data[1].use_remain) %>">
+					<i><%= member.skill_data[1].name %></i>
+					<i class="remain_bg">
+						<i class="remain_text">残り</i>
+						<i class="remain_num"><%= member.skill_data[1].use_remain %>/<%= member.skill_data[1].use_max %></i>
+					</i>
+				</a>
+			</div>
+			
+		</div>
+	</script>
+	
+	
+	<!-- 全画面演出用 -->
+	<div id="full_screen_effect_view"></div>
+	
+</div>

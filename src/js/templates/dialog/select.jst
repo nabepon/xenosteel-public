@@ -1,0 +1,42 @@
+
+<table class="cmn_win_root_table">
+<tr>
+	<td class="cmn_win_root_td">
+	<div class="cmn_win_container">
+		<div class="cmn_win_bg"></div>
+		<div class="cmn_win_min_size"   comment="ウィンドウサイズを縦横両方を指定">
+		<div class="cmn_win_margin" comment="マージンを指定">
+		<div class="cmn_win_pos"    comment="中コンテンツの縦位置調整。横は自動。">
+				
+			<table class="dialog_message_container">
+			<tr>
+			<td>
+				{% if(title != ""){ %}
+					<div class="dialog_message_title"><i class="title">{{ title }}</i></div>
+				{% } %}
+				<div class="dialog_message_text center">
+					<div class="dialog_message_text_bg"></div>
+					<table class="common_dialog_message center">
+					<tr>
+					<td>
+						<div class="select_content append_select_btn_container"></div>
+					</td>
+					</tr>
+					</table>
+				</div>
+			</td>
+			</tr>
+			</table>
+				
+			<div class="clear"></div>
+			
+			<section class="append_btn_container"></section>
+			<section class="append_close_btn_container"></section>
+			
+		</div>
+		</div>
+		</div>
+	</div>
+	</td>
+</tr>
+</table>

@@ -1,0 +1,29 @@
+{{ __.helper.startPage("quest-quest_confirm") }}
+	<div class="info_container">
+		<div class="packun_info_container">
+			所持パックン:
+			&nbsp;&nbsp;<span class="packun_{{ packun_n_id }}"></span>x{{ packun_n }}
+			&nbsp;&nbsp;<span class="packun_{{ packun_s_id }}"></span>x{{ packun_s }}
+			&nbsp;&nbsp;<span class="packun_{{ packun_d_id }}"></span>x{{ packun_d }}
+		</div>
+		<div class="deck_contaner">
+			<div class="deck">
+				{% _.each(members,function(member,n){ %}
+					<div class="card_bg_s card_{{ n + 1 }}">
+						{% if (member != undefined){ %}
+							<img src="{{ __.path.card('s',member.gra_id) }}">
+							<div class="hp_bar_container">
+								<div class="hp_bar" style="width:{{ member.hp_per * 100 }}%;"></div>
+							</div>
+						{% } %}
+					</div>
+				{% }) %}
+			</div>
+			<div class="quest_confirm_text">
+				このメンバーで冒険しますか？<br/>
+				※モンスターはショップで回復できます
+			</div>
+		</div>
+		{{ __.macro("quest_base_info",response) }}
+	</div>
+{{ __.helper.endPage() }}

@@ -1,0 +1,69 @@
+<div class="menu_info_list_contaner">
+	
+	<div class="packun_info menu_info_contaner">
+		<div class="title_text">所持パックン</div>
+		<div class="packun_list_contaner">
+			<div class="packun_contaner packun_1">
+				<div class="packun_icon"></div>
+				<div class="packun_num"><i>{{ item_data[df.ITEM_PACKUN_NORMAL] }}</i></div>
+			</div>
+			<div class="packun_contaner packun_2">
+				<div class="packun_icon"></div>
+				<div class="packun_num"><i>{{ item_data[df.ITEM_PACKUN_SUPER] }}</i></div>
+			</div>
+			<div class="packun_contaner packun_3">
+				<div class="packun_icon"></div>
+				<div class="packun_num"><i>{{ item_data[df.ITEM_PACKUN_DRAGON] }}</i></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="get_item_info menu_info_contaner">
+		<div class="title_text">入手物</div>
+		<div class="get_item_list_contaner">
+			<div class="get_item_contaner coin">
+				<div class="text">コイン：</div>
+				<div class="item_num"><i>{{ result.got_item_data[df.ITEM_GAME_MONEY].point }}</i></div>
+			</div>
+			<div class="get_item_contaner gacha_pt">
+				<div class="text">ガチャpt：</div>
+				<div class="item_num"><i>{{ result.got_item_data[df.ITEM_GACHA_POINT].point }}</i></div>
+			</div>
+			<div class="get_item_contaner money">
+				<div class="text">魔石：</div>
+				<div class="item_num"><i>{{ result.got_item_data[df.ITEM_REAL_MONEY_FREE].point }}</i></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="get_phrase_info menu_info_contaner">
+		<div class="title_text">入手フレーズ</div>
+		<a class="more_phrase more_btn"></a>
+		<div class="get_phrase_list_contaner">
+			{% _.times(3,function(n){ %}
+				<div class="get_phrase_contaner">
+					{% if(phrase_list[n]){ %}
+						<div class="phrase_text"><i>{{ st.PhraseData[phrase_list[n]].text }}</i></div>
+					{% }else{ %}
+						<div class="phrase_text"><i>　</i></div>
+					{% } %}
+				</div>
+			{% }) %}
+		</div>
+	</div>
+
+	<div class="get_card_info menu_info_contaner">
+		<div class="title_text">入手モンスター</div>
+		<a class="more_card more_btn"></a>
+		<div class="get_card_list_contaner">
+			{% _.times(5,function(n){ %}
+				<div class="card_bg_s card_{{ n + 1 }}">
+					{% if(member_list[n]){ %}
+						<img src="{{ __.path.card('s', st.CardData[ st.CardSeedData[member_list[n].card_seed_id].card_id ].gra_id ) }}">
+					{% } %}
+				</div>
+			{% }) %}
+		</div>
+	</div>
+	
+</div>

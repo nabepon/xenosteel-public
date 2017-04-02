@@ -1,0 +1,47 @@
+{{ __.helper.startPage("shop-real_money","shop_page") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>魔石ショップ</i></div>
+	<div class="page_content">
+		{{ __.macro("shop_info",response) }}
+		<div class="list_container">
+			<div id="shop_index_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				
+				<div class="description">
+					<i>
+						現在の販売魔石<br/>
+					</i>
+				</div>
+				{% _.each(product_list,function(product){ %}
+					<a class="list_btn_1 item_btn" data-se="0" data-id="{{ product.productId }}"><i>{{ product.price }}/{{ product.productId }}</i></a>
+				{% }) %}
+				
+				{% /* %}
+				<a class="list_btn_1" data-after_se="0" data-num="500"   ><i>500魔石 500円</i></a>
+				<a class="list_btn_1" data-after_se="0" data-num="1500"  ><i>1500魔石 1500円</i></a>
+				<a class="list_btn_1" data-after_se="0" data-num="5000"  ><i>5000魔石 5000円</i></a>
+				<a class="list_btn_1" data-after_se="0" data-num="10000" ><i>10000魔石 10000円</i></a>
+				<div class="description"><i>billing methods</i></div>
+				<a class="list_btn_1 init                 " data-after_se="0"><i>init</i></a>
+				<a class="list_btn_1 getAvailableProducts " data-after_se="0"><i>getAvailableProducts</i></a>
+				<a class="list_btn_1 getPurchases         " data-after_se="0"><i>getPurchases</i></a>
+				<a class="list_btn_1 buy                  " data-after_se="0"><i>buy</i></a>
+				<a class="list_btn_1 consumePurchase      " data-after_se="0"><i>consumePurchase</i></a>
+				{% */ %}
+				
+				<div class="spacer" style="height:15px;"></div>
+				<div class="bottom_spacer"></div>
+			</div>
+			
+			<div class="info_message">
+				※通信環境のいい所でご利用ください。また、通信には時間がかかることがあります。<br/>
+				※購入処理中に通信が切れると、正しく購入処理が行われない場合があります。
+				もし正しく処理が終了しなかった場合、端末の電源を一度落とし、
+				通信環境のいい所で再度魔石ショップへアクセスするようお願いします。
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+			<a class="trigger_back_key back_btn arrow_btn_1" data-back-default="/html/Shop/index"><i>戻る</i></a>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

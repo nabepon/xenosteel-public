@@ -1,0 +1,19 @@
+syntax: glob
+.git
+!.gitkeep
+*.url
+*.lnk
+*.db
+*.orig
+*.bak
+*.psd
+.DS_Store
+.sass-cache/
+.grunt/
+npm-debug.log
+node_modules/
+grunt/temp/underscore_template/
+grunt/temp/underscore_template_macro/
+grunt/temp/convert_json/*.json
+grunt/temp/convert_json_temp/*.json
+src/css/stylesheets/

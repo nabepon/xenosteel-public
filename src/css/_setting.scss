@@ -1,0 +1,155 @@
+@charset "utf-8";
+
+$prefix: -webkit-;
+$screen_x: 320px;
+$screen_y: 480px;
+$content_height: 400px;
+$footer_height: 52px;
+$title_height: 28px;
+$img: "../img/";
+$font_white: #fff;
+$bg_blue : #061b3c;
+
+@mixin rect($top:0px, $left:0px, $width:none, $height:none, $position:absolute, $type:top_left ) {
+	@if $top      == "" { $top : 0px; }
+	@if $left     == "" { $left : 0px; }
+	@if $width    == "" { $width : none; }
+	@if $height   == "" { $height : none; }
+	@if $position == "" { $position : absolute; }
+	
+	@if $type == ""           { $type  : top_left; }
+	@if $type == top_left     { top    : $top; left : $left; }
+	@if $type == top_right    { top    : $top; right: $left; }
+	@if $type == bottom_left  { bottom : $top; left : $left; }
+	@if $type == bottom_right { bottom : $top; right: $left; }
+	
+	@if $width  != none{ width: $width; }
+	@if $height != none{ height: $height; }
+    position:$position;
+}
+
+@mixin size($width:0px, $height:0px) {
+	width: $width;
+	height: $height;
+}
+
+@mixin position($top:0px, $left:0px, $position:absolute, $type:top_left) {
+	@if $position == "" { $position : absolute; }
+	@if $type     == "" { $type : top_left; }
+	@if $type == top_left     { top    : $top; left : $left; }
+	@if $type == top_right    { top    : $top; right: $left; }
+	@if $type == bottom_left  { bottom : $top; left : $left; }
+	@if $type == bottom_right { bottom : $top; right: $left; }
+    position:$position;
+}
+
+@mixin position_bottom($bottom:0px,$left:0px) {
+    bottom : $bottom;
+    left   : $left;
+    position:absolute;
+}
+@mixin position_right($top:0px,$right:0px) {
+    top  : $top;
+    right: $right;
+    position:absolute;
+}
+@mixin position_bottom_right($bottom:0px,$right:0px) {
+    bottom : $bottom;
+    right  : $right;
+    position:absolute;
+}
+
+@mixin img_bg($path) {
+    width : image-width($path)/2;
+    height: image-height($path)/2;
+	background: url($img + $path);
+	@include background-size(100% 100%);
+	background-repeat : no-repeat;
+	background-position : center center;
+}
+
+@mixin img_bg_size($path,$width,$height) {
+    width : $width;
+    height: $height;
+	background: url($img + $path);
+	@include background-size(100% 100%);
+	background-repeat : no-repeat;
+	background-position : center center;
+}
+
+@mixin shadow() {
+	@include text-shadow(1px 1px 1px #000);
+}
+@mixin font_size($size:12px) {
+	font-size:$size;
+	line-height:$size;
+}
+
+@mixin border_image_bg($path:"", $size1:1, $size2:1, $pad:false) {
+	-webkit-border-image:url(#{$img}#{$path}) $size1 / #{$size2} stretch;
+	   -moz-border-image:url(#{$img}#{$path}) $size1 fill / #{$size2} stretch;
+	        border-image:url(#{$img}#{$path}) $size1 fill / #{$size2} stretch;
+	@if $pad == true{
+		padding-top: $size2;
+	}
+}
+
+
+@mixin keyframes($animation-name) {
+	@-webkit-keyframes #{$animation-name} { @content; }
+	   @-moz-keyframes #{$animation-name} { @content; } 
+	        @keyframes #{$animation-name} { @content; }
+}
+@mixin animation-name($value){
+	-webkit-animation-name: $value;
+	   -moz-animation-name: $value;
+	        animation-name: $value;
+}
+@mixin animation-duration($value){
+	-webkit-animation-duration: $value;
+	   -moz-animation-duration: $value;
+	        animation-duration: $value;
+}
+@mixin animation-delay($value){
+	-webkit-animation-delay: $value;
+	   -moz-animation-delay: $value;
+	        animation-name: $value;
+}
+@mixin animation-timing-function($value){
+	-webkit-animation-timing-function: $value;
+	   -moz-animation-timing-function: $value;
+	        animation-timing-function: $value;
+}
+@mixin animation-iteration-count($value){
+	-webkit-animation-iteration-count: $value;
+	   -moz-animation-iteration-count: $value;
+	        animation-iteration-count: $value;
+}
+@mixin animation-direction($value){
+	-webkit-animation-direction: $value;
+	   -moz-animation-direction: $value;
+	        animation-direction: $value;
+}
+@mixin animation-fill-mode($value){
+	-webkit-animation-fill-mode: $value;
+	   -moz-animation-fill-mode: $value;
+	        animation-fill-mode: $value;
+}
+@mixin animation-play-state($value){
+	-webkit-animation-play-state: $value;
+	   -moz-animation-play-state: $value;
+	        animation-play-state: $value;
+}
+@mixin animation($value){
+	-webkit-animation: $value;
+	   -moz-animation: $value;
+	        animation: $value;
+}
+@mixin box-flex($value){
+	-webkit-box-flex: 0;
+	   -moz-box-flex: 0;
+	    -ms-box-flex: 0;
+	        box-flex: 0;
+}
+
+

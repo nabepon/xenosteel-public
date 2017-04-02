@@ -1,0 +1,10 @@
+<div id="more_get_phrase_list">
+	<div style="height:10px;"></div>
+	{% _.each(phrase_list,function(id){ %}
+		<div class="phrase_contaner">
+			<div class="phrase_text">{{ st.PhraseData[id].text }}</div>
+			<div class="phrase_info">{{ st.PhraseData[id].author }}</div>
+		</div>
+	{% }) %}
+	<div style="height:10px;"></div>
+</div>

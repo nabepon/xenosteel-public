@@ -1,0 +1,68 @@
+
+
+<macro id="card_list_menu">
+	<div class="text_hold_info"><i>※長押しで詳細が見れます</i></div>
+	<a id="toggle_status_btn" class="toggle_status_btn list_menu_btn"><i>ステータス切替</i></a>
+	<a id="sort_btn" class="sort_btn list_menu_btn"><i>攻撃力順</i></a>
+</macro>
+
+<macro id="card_list_content">
+	<div id="card_list" class="scroll_wrapper">
+		<div class="up_spacer"></div>
+		<div id="card_list_view" class="card_list_container"></div>
+		<div class="bottom_spacer"></div>
+	</div>
+	<div id="info_view"></div>
+	<div class="kei_1"></div>
+	<div class="kei_2"></div>
+	<div id="page_view"></div>
+</macro>
+
+<macro id="shop_info">
+	<div class="info_container">
+		<div class="menu_info_bg"></div>
+		<div class="status_bg">
+			<div class="status">
+				<div class="status_1">所持コイン:{{ game_money }}</div>
+				<div class="status_2">所持魔石:{{ real_money }}</div>
+				<div class="status_3">所持パックン:
+					&nbsp;&nbsp;<span class="packun_{{ packun_n_id }}"></span>x{{ packun_n }}
+					&nbsp;&nbsp;<span class="packun_{{ packun_s_id }}"></span>x{{ packun_s }}
+					&nbsp;&nbsp;<span class="packun_{{ packun_d_id }}"></span>x{{ packun_d }}
+				</div>
+			</div>
+		</div>
+	</div>
+</macro>
+
+<macro id="quest_base_info">
+	<div class="quest_base_info">
+		<div class="quest_data_info_contaner">
+			最大難易度：{{ level }}　最大フロア：{{ floor_max }}
+		</div>
+		<div class="quest_enemy_info_contaner">
+			<div class="enemy_info_text">出現モンスター</div>
+			<div class="enemys">
+				{% _.each(enemys,function(enemy,n){ %}
+					<div class="card_bg_s">
+						<img src="{{ __.path.card('s',enemy.card_data.gra_id) }}">
+					</div>
+					{{ ( (n+1)%6 == 0 ) ? "<br/>" : "" }}
+				{% }) %}
+			</div>
+		</div>
+	</div>
+</macro>
+
+<macro id="dev_menu">
+	<hr/>
+	<a class="hoge" data-href="/html/Sample/index"       ><span>sample>index          </span></a><br/>
+	<a class="hoge" data-href="/html/Sample/pc"          ><span>sample>pc             </span></a><br/>
+	<a class="hoge" data-href="/html/Sample/questdata"   ><span>sample>questdata      </span></a><br/>
+	<a class="hoge" data-href="/html/Top/index"          ><span>top>index             </span></a><br/>
+	<hr/>
+	<a class="hoge" data-href="/html/Sample/gacha"       ><span>sample>gacha          </span></a><br/>
+	<a class="hoge" data-href="/html/Test/index"         ><span>test>index            </span></a><br/>
+	<a class="hoge" data-href="/html/Sample/localstorage"><span>sample>localstorage   </span></a><br/>
+	<hr/>
+</macro>

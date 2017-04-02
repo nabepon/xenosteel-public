@@ -1,0 +1,107 @@
+
+<script type="text/javascript">
+
+/* ①Web Storageの実装確認*/
+if (typeof localStorage === 'undefined') {
+	window.alert("このブラウザはWeb Storage機能が実装されていません");
+} else {
+	/* window.alert("このブラウザはWeb Storage機能を実装しています"); */
+
+	var storage = localStorage;
+	
+	
+	
+	/* ③localStorageへの格納 */
+	function setlocalStorage() {
+
+		var key = document.getElementById("textkey").value;
+		var value = document.getElementById("textdata").value;
+
+		/* 値の入力チェック */
+		if (key && value) {
+			storage.setItem(key, value);
+		}
+
+		/* 変数の初期化 */
+		key = "";
+		value = "";
+
+		viewStorage();
+	}
+
+	/* ③localStorageからのデータの取得と表示 */
+	function viewStorage() {
+		var list = document.getElementById("list");
+		while (list.firstChild) list.removeChild(list.firstChild);
+
+		/* localStorageすべての情報の取得 */
+		for (var i=0; i < storage.length; i++) {
+			var _key = storage.key(i);
+			
+			/* localStorageのキーと値を表示 */
+			var tr = document.createElement("tr");
+			var td1 = document.createElement("td");
+			var td2 = document.createElement("td");
+			list.appendChild(tr);
+			tr.appendChild(td1);
+			tr.appendChild(td2);
+			td1.innerHTML = _key;
+			td2.innerHTML = "<textarea>" + storage.getItem(_key) + "</textarea>";
+		}
+	}
+
+	/* ④localStorageから削除 */
+	function removeStorage() {
+		var key = document.getElementById("textkey").value;
+
+		storage.removeItem(key);
+
+		/* 変数の初期化 */
+		key = "";
+
+		viewStorage();
+	}
+
+	/* ⑤localStorageからすべて削除 */
+	function removeallStorage() {
+		storage.clear();
+		viewStorage();
+	}
+
+}
+</script>
+<style>
+	table{ margin-left:10px; }
+	textarea{width:600px; height:100px; position:relative; top:1px;}
+	*{margin:0px; padding:0px; border-spacing:0px;}
+	td                   { background:#ddd; }
+	tr:nth-child(odd) td { background:#ccc; }
+	td:nth-child(1){padding:0px 5px 0px 10px; min-width:160px;}
+</style>
+
+<h2 style="margin:5px;">　localStorage</h2>
+<table>
+    <tr></tr>
+    <tr>
+        <td>
+        	保存するKey、値：<br/>
+        	<input id="textkey" type="text" /><br/><br/>
+			<button id="button" onclick="setlocalStorage()">保存</button>
+			<button id="button" onclick="removeStorage()">削除</button>
+			<button id="button" onclick="removeallStorage()">全て削除</button>
+        </td>
+        <td>
+			<textarea id="textdata" ></textarea>
+        </td>
+    </tr>
+</table>
+
+<table>
+	<tbody id="list">
+	</tbody>
+</table>
+
+<script>
+viewStorage();
+</script>
+

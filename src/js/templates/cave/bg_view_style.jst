@@ -1,0 +1,122 @@
+
+
+<style>
+	#stage_view *,
+	#stage_view,
+	.scroller *,
+	.scroller
+	{ -webkit-transform-style: preserve-3d; }
+	
+	#map_view {
+		width: {{ map.x*chip_size }}px;
+		height:{{ map.y*chip_size }}px;
+		position:relative;
+		width :320px;
+		height:300px;
+		overflow:hidden;
+		background:#{{ bg_color }};
+	}
+	#map_view .scroller{
+		width: {{ map.x*chip_size }}px;
+		height:{{ map.y*chip_size }}px;
+	}
+	#scratch_view {
+		width: {{ map.x*chip_size }}px;
+		height:{{ map.y*chip_size }}px;
+		position:relative;
+		top:0px;
+		left:0px;
+	}
+	#bg_view {
+		width: {{ map.x*chip_size-1 }}px;
+		height:{{ map.y*chip_size-1 }}px;
+		position:absolute;
+		top:0px;
+		left:0px;
+	}
+
+	.{{ chips_class.floor       }},
+	.{{ chips_class.block       }},
+	.{{ chips_class.wall        }}{
+		width: {{ chip_size+0.8 }}px;
+		height:{{ chip_size+0.8 }}px;
+		position:absolute;
+		display:block;
+	}
+	
+	.{{ chips_class.scratch_obj }},
+	.{{ chips_class.anchor      }}{
+		width: {{ chip_size+0.4 }}px;
+		height:{{ chip_size+0.4 }}px;
+		position:absolute;
+		display:block;
+	}
+	.{{ chips_class.block       }}{
+		background-color:#{{ bg_color }};
+	}
+
+/* マップチップポジション */
+	{% for(var i=0; i<map.y; i++) { %}
+		.{{ chips_class.column + i }}{ top:{{ i * chip_size -0.4 }}px; }
+	{% } %}
+
+	{% for(var i=0; i<map.x; i++) { %}
+		.{{ chips_class.row + i }}   { left:{{ i * chip_size -0.4 }}px; }
+	{% } %}
+	
+/* 壁・床グラフィック絵の指定 */
+	{% for(var i in chipsf) { %}
+		.{{ chips_class.floor + chipsf[i] }}{
+			background:url({{ __.path.img() }}map_chip/floor_sub/{{ floor_sub_gra_id }}/{{ chipsf[i] }}.png);
+			-webkit-background-size: {{ chip_size+0.8 }}px {{ chip_size+0.8 }}px;
+			background-position:-0.4px -0.4px;
+		}
+	{% } %}
+	{% for(var i in chipsw) { %}
+		.{{ chips_class.wall + chipsw[i] }}{
+			background:url({{ __.path.img() }}map_chip/wall/{{ wall_gra_id }}/{{ chipsw[i] }}.png);
+			-webkit-background-size: {{ chip_size+0.8 }}px {{ chip_size+0.8 }}px;
+			background-position:-0.4px -0.4px;
+		}
+	{% } %}
+
+/* jChrono対応 */
+	.{{ chips_class.scratch_obj }} .close_el,
+	.{{ chips_class.scratch_obj }} .first_touch_el,
+	.{{ chips_class.scratch_obj }} .next_el,
+	.{{ chips_class.scratch_obj }} .open_el,
+	.{{ chips_class.scratch_obj }} .object_el,
+	.{{ chips_class.scratch_obj }} .object_el *,
+	.{{ chips_class.scratch_obj }} .object_el .show_obj,
+	.{{ chips_class.scratch_obj }} .object_el .close_obj
+	{
+		width: {{ chip_size+0.4 }}px;
+		height:{{ chip_size+0.4 }}px;
+		position:absolute;
+		display:block;
+		background-size    : 100% 100%;
+		background-repeat  : no-repeat;
+		background-position: center center;
+		top:0px;
+		left:0px;
+	}
+	.{{ chips_class.scratch_obj }} .close_el{
+		opacity:0;
+		-webkit-border-radius: 5px;
+		background:-webkit-gradient(linear, left top, left bottom, from(rgba(30,30,30,0.5)), to(rgba(0,0,0,0.5)));
+	}
+	.{{ chips_class.scratch_obj }} .next_el{
+		opacity:0;
+		background-image:url({{ __.path.img('map_chip/fx/2.png') }});
+	}
+	.first_touch .{{ chips_class.scratch_obj }} .close_el{
+		opacity:0;
+		background-image:url({{ __.path.img('map_chip/fx/2.png') }});
+	}
+	.{{ chips_class.scratch_obj }} .open_el{
+		opacity:0;
+		background-image:url({{ __.path.img('map_chip/fx/1.png') }});
+	}
+</style>
+
+

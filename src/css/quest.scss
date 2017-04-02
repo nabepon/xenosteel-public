@@ -1,0 +1,185 @@
+@charset "utf-8";
+@import "compass";
+@import "setting";
+
+/*==========================================================================*/
+/*** area_select , cave_select
+============================================================================*/
+.world_map_img{
+	#quest-select_area_view & {
+		width:(640px/2);
+		height:(387px/2);
+		@include position(-5px);
+	}
+	#quest-select_cave_view & {
+		width:(640px*1.5);
+		height:(387px*1.5);
+	}
+}
+#quest-select_area_view,
+#quest-select_cave_view{
+	.word_map_container{
+	    @include position();
+	    height:(370px/2 - 5);
+	    overflow:hidden;
+	    background:#000;
+		@include box-flex(0);
+	    
+		.map_img_wrapper{
+		    @include position();
+		    height:(370px/2 - 5);
+		}
+		
+	    .kei_1{
+	    	@include img_bg("ui/quest/kei_map_up.png");
+	    	@include position();
+	    }
+	    .kei_2{
+	    	@include img_bg("ui/quest/kei_map_bottom.png");
+	    	@include position(167px);
+	    }
+	    .area_name{
+	    	@include img_bg("ui/quest/dungeon_info_3.png");
+	    	@include position(2px);
+	    	color:$font_white;
+	    	@include font_size(11px);
+	    	@include shadow();
+	    	text-align:center;
+			i{
+				@include position(2px);
+				width: 155px;
+			}
+	    }
+	}
+	.list_container{
+	    @include position(180px);
+	    
+	    .scroll_wrapper{
+	    	 height:220px;
+	    	 height:220px;
+	    }
+	    
+	    .please_select{
+	    	@include img_bg("ui/quest/dungeon_info_1.png");
+	    	@include position();
+	    	color:$font_white;
+	    	@include font_size(11px);
+	    	@include shadow();
+			i{
+				 @include position(4px,20px);
+			}
+	    }
+	    .please_select_2{
+	    	@extend .please_select;
+	    	@include img_bg("ui/quest/dungeon_info_2.png");
+			i{ @include position(4px,153px); }
+	    }
+		
+		.area_list_btn:after{
+			content:"";
+			display:block;
+	    	@include position(10px,223px);
+	    	@include img_bg("ui/quest/dungeon_list_arrow.png");
+		}
+		
+		.up_spacer{
+			height:20px;
+		}
+		.bottom_spacer{
+			height:10px;
+		}
+		
+	    .kei_1{
+	    	@include position(-2px);
+	    }
+	    .kei_2{
+	    	@include position_bottom();
+	    }
+	    .back_to_area_select{
+	    	@include position(-21px);
+	    }
+	    
+	    .quest_clear_icon{
+	    	@include img_bg("ui/quest/clear.png");
+	    	@include position(0px,-5px);
+	    }
+	    .quest_new_icon{
+	    	@include img_bg("ui/quest/new.png");
+	    	@include position(0px,-5px);
+	    }
+	    .quest_info{
+			margin :-5px 0 0 0;
+			padding:0 0 5px 0;
+			@include text-shadow(1px 1px 1px #000);
+	    }
+	}
+}
+
+#quest-quest_confirm{
+	width: 288px;
+	left: -2px;
+	position: relative;
+	.packun_info_container{
+		background-color:#142c64;
+		padding:5px 0px;
+		.packun_50{ @include img_bg("ui/packun/1.png"); display:inline-block; @include size(18px,18px); vertical-align: middle; margin-top: -2px; }
+		.packun_51{ @include img_bg("ui/packun/2.png"); display:inline-block; @include size(18px,18px); vertical-align: middle; margin-top: -2px; }
+		.packun_52{ @include img_bg("ui/packun/3.png"); display:inline-block; @include size(18px,18px); vertical-align: middle; margin-top: -2px; }
+	}
+	.deck_contaner{
+		@include img_bg("ui/quest/quest_confirm_deck_bg.png");
+		@include position(0px,0px,relative);
+		.deck{
+			@include position(13px,33px);
+			$left:45px;
+			.card_1{ left:($left*0); }
+			.card_2{ left:($left*1); }
+			.card_3{ left:($left*2); }
+			.card_4{ left:($left*3); }
+			.card_5{ left:($left*4); }
+			img{
+				@include position(1px,1px);
+				width :40px;
+				height:40px;
+			}
+			.card_bg_s{
+				.hp_bar_container{
+					@include position(35px,1px);
+					width:40px;
+					height:6px;
+					overflow:hidden;
+				}
+				.hp_bar{
+					height:4px;
+					height:6px;
+				}
+			}
+		}
+		.quest_confirm_text{
+			width:100%;
+			text-align:center;
+			@include position(62px,0px);
+		}
+	}
+}
+
+.quest_base_info{
+	.quest_data_info_contaner{
+		background-color:#142c64;
+		width: 288px;
+		margin: 5px 0px 5px 0px;
+		padding:5px 0px;
+	}
+	.quest_enemy_info_contaner{
+		.enemys{
+			width: initial;
+			text-align: left;
+			display: inline-block;
+			//@include position(13px,33px);
+			.card_bg_s{
+				position:relative;
+				display:inline-block;
+			}
+		}
+	}
+}

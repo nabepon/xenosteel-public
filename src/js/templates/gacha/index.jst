@@ -1,0 +1,46 @@
+{{ __.helper.startPage("gacha-index") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>ガチャ一覧</i></div>
+	<div class="page_content">
+		<div class="info_container">
+			<div class="menu_info_bg"></div>
+			<div class="status_bg">
+				<div class="status">
+					<div class="status_1">所持魔石:<i data-name="pc_real_money">{{ real_money }}</i></div>
+					<div class="status_2">所持ガチャP:<i data-name="pc_gacha_point">{{ gacha_point }}</i></div>
+				</div>
+			</div>
+			<div class="gacha_data_text">{{ info_gacha_data.name }} 出現モンスター</div>
+			<div class="deck">
+				{% _.each(info_gacha_table_data,function(card,n){ %}
+					<div class="card_bg_s card_{{ n + 1 }}">
+						{% if (card != undefined){ %}
+							<img src="{{ __.path.card('s',card.gra_id) }}">
+						{% } %}
+					</div>
+				{% }) %}
+			</div>
+		</div>
+		<div class="list_container">
+			<div id="gacha_index_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				{% _.each(gacha_list,function(gacha){ %}
+					<a class="gacha_btn list_btn_1 {{ gacha.design_class }}" data-after_se="1" data-gacha_id="{{ gacha.id }}" >
+						<i>
+							{{ gacha.name }}
+							<!-- {% if(gacha.limit_num){ %} ({{ gacha.rest_num }}/{{ gacha.limit_num }}) {% } %} -->
+						</i>
+					</a>
+					{% if(gacha.remain_term){ %}
+						<div class="gacha_info">└ {{ gacha.remain_term }} まで! ┘</div>
+					{% }else if(gacha.remain_time){ %}
+						<div class="gacha_info">└ あと {{ gacha.remain_time }}! ┘</div>
+					{% } %}
+				{% }) %}
+				<div class="bottom_spacer"></div>
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+		</div>
+	</div>
+{{ __.helper.endPage() }}

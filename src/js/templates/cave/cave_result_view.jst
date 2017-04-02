@@ -1,0 +1,41 @@
+{{ __.helper.startPage("cave-result","cave_result_page") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>クエスト結果</i></div>
+	<div class="page_content {{  (exist_reward)? 'exist_reward' : '' }}">
+		<div class="result_bg"></div>
+		<div class="kei_1"></div>
+		<div class="kei_2"></div>
+		<div class="quest_title">- {{ dungeon_name }} -</div>
+		<div class="result_img {{ play_result }}"></div>
+		<div class="result_content">
+			<div class="result"><i class="name">獲得コイン            </i><i class="num">{{ coin        }}</i></div>
+			<div class="result"><i class="name">獲得ガチャポイント    </i><i class="num">{{ real_money  }}</i></div>
+			<div class="result"><i class="name">獲得魔石              </i><i class="num">{{ gacha_pt    }}</i></div>
+			<div class="result"><i class="name">獲得フレーズ数        </i><i class="num">{{ phrase      }}</i></div>
+			<div class="result"><i class="name">獲得モンスター捕獲数  </i><i class="num">{{ capture_num }}</i></div>
+			<div class="result"><i class="name">獲得モンスター討伐回数</i><i class="num">{{ battle_cnt  }}</i></div>
+		</div>
+		{% if(result.clear_first_reward.length>0){  %}
+			<div class="result_content_clear_reward first">
+				<div class="clear_reward_container">
+					<div class="clear_reward_text"><i>初クリアボーナス！</i></div>
+					{% _.each(result.clear_first_reward,function(reward){ %}
+						<div class="clear_reward_item"><i>{{ __.helper.itemName(reward.first_reward_type, reward.first_reward_id, reward.first_reward_vol) }}</i></div>
+					{% }) %}
+				</div>
+			</div>
+		{% } %}
+		{% if(result.clear_reward.length>0){  %}
+			<div class="result_content_clear_reward">
+				<div class="clear_reward_container">
+					<div class="clear_reward_text"><i>クリアボーナス！</i></div>
+					{% _.each(result.clear_reward,function(reward){ %}
+						<div class="clear_reward_item"><i>{{ __.helper.itemName(reward.reward_type, reward.reward_id, reward.reward_vol) }}</i></div>
+					{% }) %}
+				</div>
+			</div>
+		{% } %}
+		<a class="result_btn"><i>OK</i></a>
+	</div>
+	<div class="result_black_screen"></div>
+{{ __.helper.endPage() }}

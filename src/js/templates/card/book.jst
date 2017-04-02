@@ -1,0 +1,45 @@
+{{ __.helper.startPage("card-book","card_list_page") }}
+	<div class="list_bg"></div>
+	<div class="page_title"><i>図鑑</i></div>
+	<div class="page_content">
+		<div class="list_container">
+			<div id="card_list" class="scroll_wrapper">
+				<div class="up_spacer"></div>
+				<div id="card_list_view" class="card_list_container">
+					{% _.each(discover_list,function(data){ %}
+						{% if(data.has_flag){ %}
+							<div class="book_el" data-id="{{ data.id }}">
+								<img class="face_img" src="{{ __.path.card('list',data.gra_id) }}">
+								<div class="status_1">
+									No.{{ data.zukan_no }}<br/>
+									{{ data.name }}<br/>
+								</div>
+								<div class="status_2">
+									{{ __.helper.rarityText(data.rarity) }} [{{ __.helper.attrText(data.attribute) }}]<br/>
+									HP{{ data.hp_max  }} 攻{{ data.atk_max }} 防{{ data.def_max }} 魔{{ data.mag_max }}<br/>
+								</div>
+							</div>
+						{% }else{ %}
+							<div class="book_el">
+								<div class="status_1 has_not">
+									No.{{ data.zukan_no }}<br/>
+									??????<br/>
+								</div>
+								<div class="status_2 has_not">
+									??????<br/>
+									HP??? 攻??? 防??? 魔???<br/>
+								</div>
+							</div>
+						{% } %}
+					{% }) %}
+				</div>
+				<div class="bottom_spacer"></div>
+			</div>
+			<div class="kei_1"></div>
+			<div class="kei_2"></div>
+		</div>
+		
+	</div>
+{{ __.helper.endPage() }}
+
+
